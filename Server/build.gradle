@@ -1,0 +1,26 @@
+group 'de.h-l-g.oneUpGrader'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+sourceSets {
+    main.java.srcDir 'src/main/java'
+    test.java.srcDir 'src/test/java'
+}
+
+jar {
+    from configurations.compile.collect { zipTree it }
+    manifest.attributes 'Main-Class': ''
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+
