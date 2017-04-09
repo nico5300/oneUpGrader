@@ -18,17 +18,17 @@
     <RowConstraints maxHeight="433.0" minHeight="10.0" prefHeight="421.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="471.0" prefWidth="583.0" text="Prüfungen Verifzieren" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+      <Button fx:id="btnVerifizieren" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onVerifizierenClick" prefHeight="471.0" prefWidth="583.0" text="Prüfungen Verifzieren" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="429.0" prefWidth="358.0" text="Prüfungen Abrufen" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Button fx:id="btnAbrufen" alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onAbrufenClick" prefHeight="429.0" prefWidth="358.0" text="Prüfungen Abrufen" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="506.0" prefWidth="430.0" text="Prüfungen Hochladen" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <Button fx:id="btnHochladen" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onHochladenClick" prefHeight="506.0" prefWidth="430.0" text="Prüfungen Hochladen" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <font>
             <Font size="36.0" />
          </font>

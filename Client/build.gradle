@@ -22,7 +22,7 @@ dependencies {
 jar {
     from configurations.compile.collect { zipTree it }
     from('src/main/java') {
-        include '*.fxml'
+        include '/**/*.fxml'
     }
     manifest.attributes 'Main-Class': 'de.hlg.oneUpGrader.client.Main'
 
@@ -39,6 +39,7 @@ task runJar(type: JavaExec) {
 
 task createAll {
     compileJava.execute()
+    processResources.execute()
     build.execute()
     jar.execute()
     runJar.execute()
