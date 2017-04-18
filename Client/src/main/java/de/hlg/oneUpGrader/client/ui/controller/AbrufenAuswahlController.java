@@ -1,6 +1,7 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -29,6 +30,11 @@ public class AbrufenAuswahlController {
     @FXML
     private ComboBox<String> cboxLehrer;
 
+    public void setCboxLehrerList(ObservableList<String> list) {
+        cboxLehrer.setItems(list);
+    }
+
+
     @FXML
     public void onBackClicked(ActionEvent e) {
         MainWindowView view = new MainWindowView();
@@ -36,10 +42,15 @@ public class AbrufenAuswahlController {
         Scene scene = new Scene(view.getView());
         st.setScene(scene);
         st.show();
+
     }
 
     @FXML
     public void onSuchenClicked(ActionEvent e) {
         JOptionPane.showMessageDialog(null, "AuswahlGesucht Stage öffnen");
+        String[] st = {"Hi", "Ho", "Hu"};
+        cboxLehrer.getItems().addAll(st);
+        cboxLehrer.getItems().add("HEYDFJKSÖLFJSKLD");
+
     }
 }

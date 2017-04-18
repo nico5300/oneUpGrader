@@ -4,6 +4,7 @@ package de.hlg.oneUpGrader.client;
  * Created by nico on 08.04.17.
  */
 
+import de.hlg.oneUpGrader.client.dbConnection.DbConnection;
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,10 +17,13 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
+DbConnection d;
     @Override
     public void start(Stage primaryStage) {
         MainWindowView mView = new MainWindowView();
+        System.out.println("blo");
+        System.out.println("bla");
+        d = DbConnection.getInstance();
 
         primaryStage.setWidth(1000);
         primaryStage.setHeight(600);
@@ -28,5 +32,7 @@ public class Main extends Application {
         Scene scene = new Scene(mView.getView());
         primaryStage.setScene(scene);
         primaryStage.show();
+
+
     }
 }

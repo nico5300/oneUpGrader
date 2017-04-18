@@ -1,18 +1,16 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
+import de.hlg.oneUpGrader.client.dbConnection.AbrufenAuswahlTeacherQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import javax.swing.*;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Nico on 08.04.17.
@@ -36,10 +34,26 @@ public class MainWindowController {
     @FXML
     private void onAbrufenClick(ActionEvent e) {
         AbrufenAuswahlView view = new AbrufenAuswahlView();
+
+
         Stage st = ((Stage) (btnAbrufen.getScene().getWindow()));
         Scene scene = new Scene(view.getView());
         st.setScene(scene);
         st.show();
+
+        AbrufenAuswahlTeacherQuery tq = new AbrufenAuswahlTeacherQuery();
+            tq.setOnSucceeded( (WorkerStateEvent t) -> {
+                try {
+                    ((AbrufenAuswahlController)view.getPresenter()).setCboxLehrerList(tq.get());
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                } catch (ExecutionException e1) {
+                    e1.printStackTrace();
+                }
+            });
+        new Thread(tq).start();
+
+
     }
 
     @FXML
