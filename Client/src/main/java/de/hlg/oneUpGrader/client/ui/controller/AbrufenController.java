@@ -3,15 +3,20 @@ package de.hlg.oneUpGrader.client.ui.controller;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import javax.inject.Inject;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Created by nico on 19.04.17.
  */
-public class AbrufenController {
+public class AbrufenController implements Initializable{
 
     @FXML
     private Label lbJahrgang;
@@ -25,6 +30,15 @@ public class AbrufenController {
     @FXML
     private Button btnBack;
 
+    @Inject
+    private String fachString;
+
+    @Inject
+    private String lehrerString;
+
+    @Inject
+    private int jahrgangInt;
+
     @FXML
     public void onBackClicked(ActionEvent e) {
         AbrufenAuswahlView view = new AbrufenAuswahlView();
@@ -34,4 +48,20 @@ public class AbrufenController {
         stage.show();
     }
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(!fachString.isEmpty())
+            lbFach.setText(fachString);
+        else
+            lbFach.setText("<beliebig>");
+        if(!lehrerString.isEmpty())
+            lbLehrer.setText(lehrerString);
+        else
+            lbLehrer.setText("<beliebig>");
+        if(jahrgangInt != 0)
+            lbJahrgang.setText(Integer.toString(jahrgangInt));
+        else
+            lbJahrgang.setText("<beliebig>");
+    }
 }

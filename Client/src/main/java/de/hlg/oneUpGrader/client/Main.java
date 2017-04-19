@@ -4,11 +4,14 @@ package de.hlg.oneUpGrader.client;
  * Created by nico on 08.04.17.
  */
 
+import com.airhacks.afterburner.injection.Injector;
 import de.hlg.oneUpGrader.client.dbConnection.DbConnection;
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.util.HashMap;
 
 
 public class Main extends Application {
@@ -20,13 +23,14 @@ public class Main extends Application {
 DbConnection d;
     @Override
     public void start(Stage primaryStage) {
-        MainWindowView mView = new MainWindowView();
-        System.out.println("blo");
-        System.out.println("bla");
+        System.out.println("Starte Anwendung");
         d = DbConnection.getInstance();
 
-        primaryStage.setWidth(1000);
-        primaryStage.setHeight(600);
+        HashMap<String, Object> injectionMap = new HashMap<>();
+        injectionMap.put("injectionMap", injectionMap);
+        Injector.setConfigurationSource(injectionMap::get);
+
+        MainWindowView mView = new MainWindowView();
         primaryStage.setResizable(false);
         primaryStage.setTitle("OneUpGrader " + ver);
         Scene scene = new Scene(mView.getView());
