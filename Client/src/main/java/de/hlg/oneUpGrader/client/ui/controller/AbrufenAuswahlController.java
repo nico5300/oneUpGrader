@@ -34,6 +34,13 @@ public class AbrufenAuswahlController {
         cboxLehrer.setItems(list);
     }
 
+    public void setCboxFachList(ObservableList<String> list) {
+        cboxFach.setItems(list);
+    }
+
+    public void setCboxJahrgangList(ObservableList<String> list) {
+        cboxJahrgang.setItems(list);
+    }
 
     @FXML
     public void onBackClicked(ActionEvent e) {
