@@ -1,5 +1,7 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
+import com.airhacks.afterburner.views.FXMLView;
+import de.hlg.oneUpGrader.client.UpdateHandler;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
@@ -16,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Created by nico on 19.04.17.
  */
-public class AbrufenController implements Initializable{
+public class AbrufenController implements Initializable, UpdateHandler<FXMLView>{
 
     @FXML
     private Label lbJahrgang;
@@ -29,6 +32,9 @@ public class AbrufenController implements Initializable{
 
     @FXML
     private Button btnBack;
+
+    @FXML
+    private VBox vbox;
 
     @Inject
     private String fachString;
@@ -63,5 +69,11 @@ public class AbrufenController implements Initializable{
             lbJahrgang.setText(Integer.toString(jahrgangInt));
         else
             lbJahrgang.setText("<beliebig>");
+    }
+
+
+    @Override
+    public void handle(FXMLView obj) {
+        vbox.getChildren().add(obj.getView());
     }
 }

@@ -1,5 +1,6 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
+import de.hlg.oneUpGrader.client.dbConnection.AbrufenQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenView;
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
 import javafx.collections.ObservableList;
@@ -21,7 +22,7 @@ import java.util.ResourceBundle;
 /**
  * Created by nico on 09.04.17.
  */
-public class AbrufenAuswahlController implements Initializable{
+public class AbrufenAuswahlController implements Initializable {
     @FXML
     private Button btnBack;
 
@@ -38,16 +39,16 @@ public class AbrufenAuswahlController implements Initializable{
     private ComboBox<String> cboxLehrer;
 
     @Inject
-    HashMap<String, Object> injectionMap;
+    private HashMap<String, Object> injectionMap;
 
     @Inject
-    ObservableList<String> jahrgangList;
+    private ObservableList<String> jahrgangList;
 
     @Inject
-    ObservableList<String> fachList;
+    private ObservableList<String> fachList;
 
     @Inject
-    ObservableList<String> lehrerList;
+    private ObservableList<String> lehrerList;
 
     @Inject
     private String fachString;
@@ -58,15 +59,15 @@ public class AbrufenAuswahlController implements Initializable{
     @Inject
     private int jahrgangInt;
 
-    public void setCboxLehrerList(ObservableList<String> list) {
+    void setCboxLehrerList(ObservableList<String> list) {
         cboxLehrer.setItems(list);
     }
 
-    public void setCboxFachList(ObservableList<String> list) {
+    void setCboxFachList(ObservableList<String> list) {
         cboxFach.setItems(list);
     }
 
-    public void setCboxJahrgangList(ObservableList<String> list) {
+    void setCboxJahrgangList(ObservableList<String> list) {
         cboxJahrgang.setItems(list);
     }
 
@@ -107,15 +108,35 @@ public class AbrufenAuswahlController implements Initializable{
         } catch (NumberFormatException e1) {
             //e1.printStackTrace();
             JOptionPane.showConfirmDialog(null, "Der Jahrgang muss eine Zahl zwischen\n" +
-                    "5 und 12 (eingeschlossen) sein!", "Fehler!", JOptionPane.DEFAULT_OPTION, JOptionPane.OK_OPTION);
+                    "5 und 12 (eingeschlossen) sein!", "Fehler!", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+
+
+        ////////// ZUR VEREINFACHUNG !!!!! Später wenn Wunschkriterien eingeführt, entfernen ///////
+
+        if(lehrerString.isEmpty() || fachString.isEmpty() || jahrgangInt == 0) {
+            JOptionPane.showConfirmDialog(null, "Alle Felder müssen ausgefüllt werden\n" +
+                    "(zumindest noch... Kann sich alles ändern)", "Fehler!", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         injectionMap.put("lehrerString", lehrerString);
         injectionMap.put("fachString", fachString);
         injectionMap.put("jahrgangInt", jahrgangInt);
 
+        AbrufenQuery query = new AbrufenQuery(lehrerString, fachString, jahrgangInt);
+
+
         AbrufenView view = new AbrufenView();
+        query.addObserver( (AbrufenController) view.getPresenter());
+        Thread thread = new Thread(query);
+        thread.setDaemon(true);
+        thread.run();
+
         Stage st = (Stage) cboxFach.getScene().getWindow();
         Scene scene  = new Scene(view.getView());
         st.setScene(scene);
@@ -125,9 +146,9 @@ public class AbrufenAuswahlController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(cboxJahrgang.getItems().isEmpty())
-            cboxJahrgang.setItems(jahrgangList);
-
+        if(cboxJahrgang.getItems().isEmpty())       // Diese Abfragen verhindern das Entstehen einer
+            cboxJahrgang.setItems(jahrgangList);    // Race-Condition, die durch die vorzeitige
+                                                    // Abarbeitung des AbrufenAuswahlQuerys entstehen könnte
         if(cboxLehrer.getItems().isEmpty())
             cboxLehrer.setItems(lehrerList);
 
@@ -139,4 +160,6 @@ public class AbrufenAuswahlController implements Initializable{
         if(jahrgangInt != 0)
             cboxJahrgang.getEditor().setText(Integer.toString(jahrgangInt));
     }
+
+
 }

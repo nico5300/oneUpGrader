@@ -20,7 +20,8 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-DbConnection d;
+    private DbConnection d;
+
     @Override
     public void start(Stage primaryStage) {
         System.out.println("Starte Anwendung");
@@ -28,7 +29,7 @@ DbConnection d;
 
         HashMap<String, Object> injectionMap = new HashMap<>();
         injectionMap.put("injectionMap", injectionMap);
-        Injector.setConfigurationSource(injectionMap::get);
+        Injector.setConfigurationSource(injectionMap::get); // It's a kind of magic...
 
         MainWindowView mView = new MainWindowView();
         primaryStage.setResizable(false);

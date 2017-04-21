@@ -77,6 +77,4 @@ public class MainWindowController {
         JOptionPane.showMessageDialog(null, "Hochladen Stage öffnen");
 
     }
-
-
 }
