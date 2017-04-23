@@ -99,7 +99,7 @@ public class AbrufenQuery extends Task<Void>{
         System.out.println(statement.execute() ? "Abfrage Erfolgreich" : "Fehler bei Abfrage");
 
         ResultSet result = statement.getResultSet();
-        
+
 ////////// VERARBEITUNG //////////
 
 
