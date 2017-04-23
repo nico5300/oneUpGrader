@@ -1,5 +1,7 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
+import com.airhacks.afterburner.views.FXMLView;
+import de.hlg.oneUpGrader.client.UpdateHandler;
 import de.hlg.oneUpGrader.client.dbConnection.AbrufenQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenView;
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
@@ -22,6 +24,7 @@ import java.util.ResourceBundle;
 /**
  * Created by nico on 09.04.17.
  */
+@SuppressWarnings("unchecked") // Das ist hier in Ordnung............
 public class AbrufenAuswahlController implements Initializable {
     @FXML
     private Button btnBack;
@@ -132,10 +135,11 @@ public class AbrufenAuswahlController implements Initializable {
 
 
         AbrufenView view = new AbrufenView();
-        query.addObserver( (AbrufenController) view.getPresenter());
+        query.addObserver( (UpdateHandler<FXMLView>) view.getPresenter());
+        //.........weil hier oben nur AbrufenController rauskommen, die UpdateHandler implementieren!
         Thread thread = new Thread(query);
         thread.setDaemon(true);
-        thread.run();
+        thread.start();
 
         Stage st = (Stage) cboxFach.getScene().getWindow();
         Scene scene  = new Scene(view.getView());

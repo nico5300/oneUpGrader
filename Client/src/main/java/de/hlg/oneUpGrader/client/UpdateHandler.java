@@ -5,6 +5,6 @@ package de.hlg.oneUpGrader.client;
  */
 
 @FunctionalInterface
-public interface UpdateHandler<T> {
+public interface UpdateHandler<T> {     // Ungewolltes Observer-Pattern
     public void handle(T obj);
 }

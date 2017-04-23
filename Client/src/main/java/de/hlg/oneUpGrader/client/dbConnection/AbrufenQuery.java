@@ -35,7 +35,7 @@ public class AbrufenQuery extends Task<Void>{
 
     private String queryPart2 = "FROM Prüfungen, Fach, Lehrer " +
                                 "WHERE Fach.FachID = Prüfungen.Fach && " +
-                                "Lehrer.LehrerID = Prüfungen.Lehrer ";
+                                "Lehrer.LehrerID = Prüfungen.Lehrer "; // Inner Join...
 
 
     private String jahrgangStringQuery = "&& ? = Prüfungen.Jahrgangsstufe ";
@@ -46,9 +46,7 @@ public class AbrufenQuery extends Task<Void>{
     private String fachStringQuery = "&& Fach.Name LIKE CONCAT('%', ?, '%') ";
 
 
-    public static void main(String[] args) throws Exception{
-        new AbrufenQuery("Hans Vader", "", 11).call();
-    }
+
 
     public AbrufenQuery(String lehrer, String fach, int jahrgang) {
         this.lehrer = lehrer;
@@ -97,16 +95,13 @@ public class AbrufenQuery extends Task<Void>{
             statement.setString(anInt, lehrer);
         }
 
-//////////// ABFRAGE ////////////
-        System.out.println(statement.execute());
+//////////// ABFRAGE (möglicherweise zeitintensiv) ////////////
+        System.out.println(statement.execute() ? "Abfrage Erfolgreich" : "Fehler bei Abfrage");
 
         ResultSet result = statement.getResultSet();
-
-        System.out.println(result);
-
+        
 ////////// VERARBEITUNG //////////
 
-        //DateFormat.getDateInstance(DateFormat.DATE_FIELD, Locale.getDefault()).format(result.getDate(2));
 
 
         while (result.next()) {
@@ -118,7 +113,8 @@ public class AbrufenQuery extends Task<Void>{
                 final int prüfungsIDResult = result.getInt(1);
 
 
-                Platform.runLater(() -> {
+                Platform.runLater( () -> {
+                    // Lambda-Magic, entspricht new Runnable() {...}, bloß geiler (leichter zum lesen), kein Boilerplate
                     AbrufenEntryController controller = (AbrufenEntryController) view.getPresenter();
 
 

@@ -1,5 +1,6 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,7 +24,7 @@ public class AbrufenEntryController {
     private Button btnKaufen;
 
     private int prüfungsID;
-    private int prüfungsTyp; // 1 = Klausur, 2 = Schulaufgabe, 3 = Test, 4 = Ex
+    private int prüfungsTyp; // 1 = Klausur, 2 = Schulaufgabe, 3 = Test, 4 = Ex, keine enums weil man die Dinger nicht in MySQL reinkriegt
     private Date datum = Calendar.getInstance().getTime();
 
 
@@ -42,8 +43,8 @@ public class AbrufenEntryController {
     }
 
     private void onUpdate() {
-        StringBuilder builder = new StringBuilder(30);
-        int kosten;
+        StringBuilder builder = new StringBuilder(30); // StringBuilder ist effizienter...
+        int kosten;                                       // sonst gäbs ihn ja ned
         switch (prüfungsTyp) {
             case 1:
                 builder.append("Klausur ");
@@ -65,9 +66,15 @@ public class AbrufenEntryController {
                 kosten = 0;
         }
         builder.append("vom ");
-        builder.append(DateFormat.getDateInstance(DateFormat.DATE_FIELD, Locale.getDefault()).format(datum));
+        builder.append(DateFormat.getDateInstance(DateFormat.DATE_FIELD, Locale.getDefault()).format(datum)); // Mach Datum schön...
 
         lbBeschreibung.setText(builder.toString());
         lbPreis.setText(Integer.toString(kosten));
+    }
+
+    @FXML
+    public void onButtonClicked(ActionEvent e) {
+        btnKaufen.getStyleClass().remove("kaufen-button");
+        btnKaufen.getStyleClass().add("herunterladen-button");
     }
 }

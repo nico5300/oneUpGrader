@@ -17,6 +17,9 @@ public class DbConnection {
     private String user = "javadebuguser";
     private String password = "java";
 
+
+    private static int whichServer = 1; // 1 = DNS:raspberrypi, 2 = root@localhost, 3
+
     public static synchronized DbConnection getInstance() { // Mach DbConnection zu nem Singleton
         if(instance == null) {
             instance = new DbConnection();
@@ -38,7 +41,17 @@ public class DbConnection {
         System.out.println("Trying to connect...");
 
         try {
-            connection = DriverManager.getConnection(url, user, password);
+            switch (whichServer) {
+                case 1:
+                    connection = DriverManager.getConnection(url, user, password);
+                    break;
+                case 2:
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost/oneUpGrader", "root", "");
+                    break;
+                case 3:
+                    connection = DriverManager.getConnection("jdbc:mysql://gregers.ddns.net:50000/oneUpGrader?verifyServerCertificate=false&useSSL=true&requireSSL=true&useTimezone=false", user, password);
+                    break;
+            }
             System.out.println("Connected...");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,6 +79,16 @@ public class DbConnection {
             System.out.println("Creating PreparedStatement out of: " + q + " failed");
             e.printStackTrace();
             return Optional.empty();
+        }
+    }
+
+    public void closeConnection() {
+        try {
+            connection.close();
+            System.out.println("Datenbankverbindung beendet");
+        } catch (SQLException e) {
+            System.out.println("Konnte Datenbankverbindung nicht ordnungsgemäß beenden!");
+            e.printStackTrace();
         }
     }
 
