@@ -2,6 +2,7 @@ package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.dbConnection.AbrufenAuswahlQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
+import de.hlg.oneUpGrader.client.ui.view.VerifizierenAuswahlView;
 import javafx.collections.FXCollections;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -33,7 +34,11 @@ public class MainWindowController {
 
     @FXML
     private void onVerifizierenClick(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Verifizieren Stage öffnen");
+        VerifizierenAuswahlView view = new VerifizierenAuswahlView();
+        Stage st = ((Stage) (btnVerifizieren.getScene().getWindow()));
+        Scene scene = new Scene(view.getView());
+        st.setScene(scene);
+        st.show();
     }
 
     @FXML
