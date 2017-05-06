@@ -113,9 +113,6 @@
                            </font>
                         </Button>
                      </center>
-                     <bottom>
-                        <Button fx:id="btnAlreadyBought" mnemonicParsing="false" prefHeight="26.0" prefWidth="440.0" text="Bereits gekaufte Prüfungen abrufen" BorderPane.alignment="CENTER" />
-                     </bottom>
                   </BorderPane>
                </children>
             </GridPane>

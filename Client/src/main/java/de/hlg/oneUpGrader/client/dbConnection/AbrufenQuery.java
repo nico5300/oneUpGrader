@@ -137,12 +137,6 @@ public class AbrufenQuery extends Task<Void>{
         return null;
     }
 
-    public void execute() {
-        Thread t = new Thread(this);
-        t.setDaemon(true);
-        t.start();
-    }
-
     public void addObserver(UpdateHandler<FXMLView> handler) {
         observerList.add(handler);
     }

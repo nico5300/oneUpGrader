@@ -18,7 +18,7 @@ public class DbConnection {
     private String password = "java";
 
 
-    private static int whichServer = 2; // 1 = DNS:raspberrypi, 2 = root@localhost, 3
+    private static int whichServer = 1; // 1 = DNS:raspberrypi, 2 = root@localhost, 3
 
     public static synchronized DbConnection getInstance() { // Mach DbConnection zu nem Singleton
         if(instance == null) {

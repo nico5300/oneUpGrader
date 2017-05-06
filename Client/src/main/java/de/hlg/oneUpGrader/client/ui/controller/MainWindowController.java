@@ -67,7 +67,9 @@ public class MainWindowController {
             injectionMap.put("jahrgangList", aaq.getJahrgangList());
         });
 
-        aaq.execute();
+        Thread t = new Thread(aaq);
+        t.setDaemon(true);
+        t.start();
     }
 
     @FXML

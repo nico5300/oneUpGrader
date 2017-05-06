@@ -55,12 +55,6 @@ public class AbrufenAuswahlQuery extends Task<Void> {
         return null;
     }
 
-    public void execute() {
-        Thread t = new Thread(this);
-        t.setDaemon(true);
-        t.start();
-    }
-
     public ObservableList<String> getJahrgangList() {
         return jahrgangList;
     }

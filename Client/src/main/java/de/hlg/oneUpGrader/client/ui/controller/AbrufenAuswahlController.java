@@ -33,9 +33,6 @@ public class AbrufenAuswahlController implements Initializable {
     private Button btnSuchen;
 
     @FXML
-    private Button btnAlreadyBought;
-
-    @FXML
     private ComboBox<String> cboxJahrgang;
 
     @FXML
@@ -140,7 +137,9 @@ public class AbrufenAuswahlController implements Initializable {
         AbrufenView view = new AbrufenView();
         query.addObserver( (UpdateHandler<FXMLView>) view.getPresenter());
         //.........weil hier oben nur AbrufenController rauskommen, die UpdateHandler implementieren!
-        query.execute();
+        Thread thread = new Thread(query);
+        thread.setDaemon(true);
+        thread.start();
 
         Stage st = (Stage) cboxFach.getScene().getWindow();
         Scene scene  = new Scene(view.getView());
