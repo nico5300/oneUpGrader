@@ -2,30 +2,35 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hlg.oneUpGrader.client.ui.controller.VerifizierenAuswahlController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hlg.oneUpGrader.client.ui.controller.VerifizierenAuswahlController">
    <children>
-      <GridPane fx:id="btnBack" gridLinesVisible="true" layoutX="14.0" layoutY="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="20.0">
+      <GridPane fx:id="btnBack" gridLinesVisible="true" layoutX="14.0" layoutY="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="48.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="68.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="250.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="250.0" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="435.0" minHeight="10.0" prefHeight="417.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" text="&lt;=" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prüfungen Verifizieren" GridPane.rowIndex="1">
+            <Button fx:id="btnBack" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="48.0" prefWidth="48.0" text="&lt;--">
+               <font>
+                  <Font size="16.0" />
+               </font></Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prüfungen verifizieren" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="15.0" />
+                  <Insets left="20.0" />
                </GridPane.margin>
                <font>
                   <Font size="36.0" />
@@ -33,7 +38,7 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bitte bewerten Sie die zu herunterladende Prüfung hinsichtlich den angegebenen Kennzeichnungsmerkmalen sowie der Lesbarkeit." GridPane.rowIndex="2">
                <GridPane.margin>
-                  <Insets left="15.0" />
+                  <Insets left="20.0" />
                </GridPane.margin>
                <font>
                   <Font size="14.0" />
@@ -42,16 +47,149 @@
             <GridPane GridPane.rowIndex="3">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="205.0" minHeight="205.0" prefHeight="205.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
-               <GridPane.margin>
-                  <Insets bottom="350.0" left="20.0" right="20.0" top="20.0" />
-               </GridPane.margin>
+               <children>
+                  <GridPane gridLinesVisible="true">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="207.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="713.0" minWidth="10.0" prefWidth="713.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </GridPane.margin>
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Jahrgangsstufe:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <center>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fach:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <center>
+                              <Label fx:id="labelLehrer" prefHeight="25.0" prefWidth="703.0" text="..." BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <center>
+                              <Label fx:id="labelFach" prefHeight="25.0" prefWidth="703.0" text="..." BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <center>
+                              <Label fx:id="labelJahrgangsstufe" prefHeight="25.0" prefWidth="703.0" text="..." BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                           <center>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Datum:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                           <center>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <center>
+                              <Label fx:id="labelDatum" prefHeight="25.0" prefWidth="703.0" text="..." BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <center>
+                              <Label fx:id="labelArt" prefHeight="25.0" prefWidth="703.0" text="..." BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                           <center>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lehrer:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                           </center>
+                        </BorderPane>
+                     </children>
+                  </GridPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <center>
+                        <Button fx:id="btnPruefungHerunterladen" mnemonicParsing="false" onAction="#onPruefungHerunterladenClicked" prefHeight="65.0" prefWidth="300.0" text="Prüfung herunterladen" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <BorderPane.margin>
+                              <Insets top="8.0" />
+                           </BorderPane.margin>
+                        </Button>
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <center>
+                        <Button fx:id="btnBewerten" mnemonicParsing="false" onAction="#onBewertenClicked" prefHeight="65.0" prefWidth="300.0" text="bewerten" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <BorderPane.margin>
+                              <Insets bottom="8.0" />
+                           </BorderPane.margin>
+                        </Button>
+                     </center>
+                  </BorderPane>
+               </children>
             </GridPane>
          </children>
       </GridPane>
