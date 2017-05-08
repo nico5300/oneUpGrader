@@ -16,9 +16,14 @@ public class DbConnection {
             "?verifyServerCertificate=false&useSSL=true&requireSSL=true&useTimezone=false";
     private String user = "javadebuguser";
     private String password = "java";
+    private String hlgUrl = "jdbc:mysql://hlg-win.de/11i1617bomi1_1" +
+            "?verifyServerCertificate=false&useSSL=true&requireSSL=true&useTimezone=false";
+    private String hlgUser = "11i1617bomi1";
+    private String hlgPassword = "rqavyu";
 
 
-    private static int whichServer = 1; // 1 = DNS:raspberrypi, 2 = root@localhost, 3
+    private static int whichServer = 4; // 1 = DNS:raspberrypi, 2 = root@localhost, 3 gregers.ddns.net
+                                        // 4 = hlg-win.de
 
     public static synchronized DbConnection getInstance() { // Mach DbConnection zu nem Singleton
         if(instance == null) {
@@ -51,6 +56,8 @@ public class DbConnection {
                 case 3:
                     connection = DriverManager.getConnection("jdbc:mysql://gregers.ddns.net:50000/oneUpGrader?verifyServerCertificate=false&useSSL=true&requireSSL=true&useTimezone=false", user, password);
                     break;
+                case 4:
+                    connection = DriverManager.getConnection(hlgUrl, hlgUser, hlgPassword);
             }
             System.out.println("Connected...");
         } catch (SQLException e) {
