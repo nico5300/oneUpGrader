@@ -15,6 +15,12 @@ public class VerifizierenAuswahlController {
     @FXML
     private Button btnBack;
 
+    @FXML
+    private Button btnPruefungHerunterladen;
+
+    @FXML
+    private Button btnBewerten;
+
     public void onBackClicked(ActionEvent e) {
         MainWindowView view = new MainWindowView();
         Stage stage = (Stage) btnBack.getScene().getWindow();
@@ -22,4 +28,16 @@ public class VerifizierenAuswahlController {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    public void onPruefungHerunterladenClicked(ActionEvent e) {
+
+    }
+
+    @FXML
+    public void onBewertenClicked(ActionEvent e) {
+
+    }
+
+
 }
