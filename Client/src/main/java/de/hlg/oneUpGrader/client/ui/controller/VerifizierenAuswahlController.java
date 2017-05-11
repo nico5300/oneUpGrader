@@ -5,12 +5,28 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
  * Created by nico on 04.05.17.
  */
 public class VerifizierenAuswahlController {
+
+    @FXML
+    private Label labelJahrgangsstufe;
+
+    @FXML
+    private Label labelFach;
+
+    @FXML
+    private Label labelLehrer;
+
+    @FXML
+    private Label labelDatum;
+
+    @FXML
+    private Label labelArt;
 
     @FXML
     private Button btnBack;

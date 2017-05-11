@@ -24,6 +24,9 @@ public class MainWindowController {
     private HashMap<String, Object> injectionMap;
 
     @FXML
+    private Button btnAbmelden;
+
+    @FXML
     private Button btnVerifizieren;
 
     @FXML
@@ -31,6 +34,11 @@ public class MainWindowController {
 
     @FXML
     private Button btnHochladen;
+
+    @FXML
+    public void onAbmeldenClicked(ActionEvent e) {
+        //to do
+    }
 
     @FXML
     private void onVerifizierenClick(ActionEvent e) {
