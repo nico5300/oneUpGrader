@@ -1,5 +1,7 @@
 package de.hlg.oneUpGrader.client.dbConnection;
 
+import javafx.concurrent.Task;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,12 +10,18 @@ import java.util.Optional;
 /**
  * Created by Michael on 12.05.2017.
  */
-public class PunkteAbrufenQuery {
+public class PunkteAbrufenQuery extends Task<Integer> {
 
     String query1 = "SELECT Punkte FROM Anwender WHERE Email = '";
     String query2 = "';";
+    String username;
 
-    public int PunkteAbrufenQuery(String username) throws SQLException {
+    public PunkteAbrufenQuery(String benutzer)
+    {
+        username = benutzer;
+    }
+
+    protected Integer call() throws SQLException {
         DbConnection datenbank = DbConnection.getInstance();
 
         StringBuilder queryComplete = new StringBuilder();
@@ -35,11 +43,12 @@ public class PunkteAbrufenQuery {
         if(ergebnis.next())
         {
             int punkte = ergebnis.getInt(0);
-            return punkte;                                          //Ergebnis(Anzahl der Punkte des Users) zurückgeben
+            return Integer.valueOf(punkte);                         //Ergebnis(Anzahl der Punkte des Users) zurückgeben
         }
 
         return 0;                                                   //Wenn Fehler -> immer 0
     }
+
 
 
 }
