@@ -37,7 +37,12 @@ public class MainWindowController {
 
     @FXML
     public void onAbmeldenClicked(ActionEvent e) {
-        //to do
+        //passwort aus memory löschen 
+        AnmeldenView view = new AnmeldenView();
+        Stage st = ((Stage) (btnVerifizieren.getScene().getWindow()));
+        Scene scene = new Scene(view.getView());
+        st.setScene(scene);
+        st.show();
     }
 
     @FXML
