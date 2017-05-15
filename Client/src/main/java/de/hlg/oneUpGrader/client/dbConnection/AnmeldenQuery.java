@@ -1,5 +1,7 @@
 package de.hlg.oneUpGrader.client.dbConnection;
 
+import javafx.concurrent.Task;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,13 +10,21 @@ import java.util.Optional;
 /**
  * Created by Michael on 12.05.2017.
  */
-public class AnmeldenQuery {
+public class AnmeldenQuery extends Task<Boolean> {
 
     private String query1 = "SELECT * FROM Anwender WHERE Email = '";
     private String query2 = "' AND Passwort = '";
     private String query3 = "';";
+    private String username;
+    private String passwort;
 
-    public boolean AnmeldenQuery(String username, String passwort) throws SQLException {
+    public AnmeldenQuery(String benutzer, String password)
+    {
+        username = benutzer;
+        passwort = password;
+    }
+
+    protected Boolean call() throws SQLException {
         DbConnection datenbank = DbConnection.getInstance();
 
         StringBuilder queryComplete = new StringBuilder();
