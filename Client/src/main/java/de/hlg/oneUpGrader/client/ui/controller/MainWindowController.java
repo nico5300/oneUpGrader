@@ -2,6 +2,7 @@ package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.dbConnection.AbrufenAuswahlQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
+import de.hlg.oneUpGrader.client.ui.view.AnmeldenView;
 import de.hlg.oneUpGrader.client.ui.view.VerifizierenAuswahlView;
 import javafx.collections.FXCollections;
 import javafx.concurrent.WorkerStateEvent;

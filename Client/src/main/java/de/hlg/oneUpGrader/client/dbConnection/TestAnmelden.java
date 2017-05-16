@@ -10,14 +10,14 @@ import java.util.Optional;
 /**
  * Created by Michael on 12.05.2017.
  */
-public class AnmeldenQuery extends Task<Boolean> {
+public class TestAnmelden extends Task<Boolean> {
 
     private String query1 = "SELECT * FROM Anwender WHERE Email = ? AND Passwort = ?;";
 
     private String username;
     private String passwort;
 
-    public AnmeldenQuery(String benutzer, String password)
+    public TestAnmelden(String benutzer, String password)
     {
         username = benutzer;
         passwort = password;

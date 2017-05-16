@@ -1,11 +1,11 @@
-package main.java.de.hlg.oneUpGrader.client.ui.controller;
+package de.hlg.oneUpGrader.client.ui.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import java.awt.event.ActionEvent;
 
 /**
  * Created by Jakob on 11.05.2017.
