@@ -52,6 +52,12 @@ public class AbrufenController implements Initializable, UpdateHandler<FXMLView>
         Scene scene = new Scene(view.getView());
         stage.setScene(scene);
         stage.show();
+
+    }
+
+    public void onSuchen()
+    {
+
     }
 
 

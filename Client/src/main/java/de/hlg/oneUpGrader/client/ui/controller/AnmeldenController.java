@@ -1,6 +1,7 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
+import de.hlg.oneUpGrader.client.ui.view.RegistrierenView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -43,5 +44,13 @@ public class AnmeldenController {
     @FXML
     public void onRegistrierenClicked(ActionEvent e) {
         //code here
+        RegistrierenView view = new RegistrierenView();
+        Stage currentStage = (Stage) txtfieldEmail.getScene().getWindow();
+        Stage newStage = new Stage();
+        newStage.setTitle(  currentStage.getTitle() );
+        Scene scene = new Scene(view.getView());
+        newStage.setScene(scene);
+        newStage.show();
+        currentStage.close();
     }
 }
