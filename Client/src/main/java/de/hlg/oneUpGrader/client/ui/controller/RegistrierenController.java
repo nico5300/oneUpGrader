@@ -1,4 +1,4 @@
-package main.java.de.hlg.oneUpGrader.client.ui.controller;
+package de.hlg.oneUpGrader.client.ui.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

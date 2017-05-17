@@ -1,4 +1,4 @@
-package main.java.de.hlg.oneUpGrader.client.ui.view;
+package de.hlg.oneUpGrader.client.ui.view;
 
 import com.airhacks.afterburner.views.FXMLView;
 
