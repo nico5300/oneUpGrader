@@ -46,11 +46,8 @@ public class AnmeldenController {
         //code here
         RegistrierenView view = new RegistrierenView();
         Stage currentStage = (Stage) txtfieldEmail.getScene().getWindow();
-        Stage newStage = new Stage();
-        newStage.setTitle(  currentStage.getTitle() );
         Scene scene = new Scene(view.getView());
-        newStage.setScene(scene);
-        newStage.show();
-        currentStage.close();
+        currentStage.setScene(scene);
+        currentStage.show();
     }
 }
