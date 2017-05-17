@@ -10,6 +10,8 @@ import java.util.Optional;
 public class DbConnection {
 
     private static DbConnection instance;
+    private boolean working = false;
+
 
     private Connection connection;
     private String url = "jdbc:mysql://raspberrypi/oneUpGrader" +
@@ -59,6 +61,7 @@ public class DbConnection {
                 case 4:
                     connection = DriverManager.getConnection(hlgUrl, hlgUser, hlgPassword);
             }
+            working = true;
             System.out.println("Connected...");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,6 +71,9 @@ public class DbConnection {
     }
 
     Optional<ResultSet> executeQuery(String q) {
+
+        if(!working)
+            return Optional.empty();
 
         try {
             Statement statement = connection.createStatement();
@@ -80,6 +86,9 @@ public class DbConnection {
     }
 
     Optional<PreparedStatement> getPreparedStatement(String q) {
+        if (!working)
+            return Optional.empty();
+
         try {
             return Optional.of(connection.prepareStatement(q));
         } catch (SQLException e) {

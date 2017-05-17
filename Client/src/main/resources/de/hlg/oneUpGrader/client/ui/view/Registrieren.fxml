@@ -12,7 +12,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hlg.oneUpGrader.client.ui.controller.RegistrierenController">
    <children>
       <GridPane gridLinesVisible="true" layoutX="60.0" layoutY="155.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
@@ -63,6 +62,27 @@
                   <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <left>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <BorderPane.margin>
+                              <Insets left="7.0" />
+                           </BorderPane.margin>
+                        </Text>
+                     </left>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <center>
+                        <TextField fx:id="txtfieldEmail" promptText="z.B.: Max.Mustermann@MusterMail.de" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="7.0" right="7.0" />
+                           </BorderPane.margin>
+                        </TextField>
+                     </center>
+                  </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <left>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort:" BorderPane.alignment="CENTER">
@@ -84,27 +104,26 @@
                         </PasswordField>
                      </center>
                   </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                     <center>
-                        <TextField fx:id="txtfieldEmail" promptText="z.B.: Max.Mustermann@MusterMail.de" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets left="7.0" right="7.0" />
-                           </BorderPane.margin>
-                        </TextField>
-                     </center>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9" />
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                      <left>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort bestätigen:" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets left="7.0" />
                            </BorderPane.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                         </Text>
                      </left>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                     <center>
+                        <PasswordField fx:id="passfieldPasswortBestaetigen" promptText="---" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="7.0" right="7.0" />
+                           </BorderPane.margin>
+                        </PasswordField>
+                     </center>
                   </BorderPane>
                   <Button fx:id="btnRegistrieren" mnemonicParsing="false" onAction="#onRegistrierenClicked" text="registrieren" GridPane.rowIndex="7">
                      <GridPane.margin>
@@ -122,27 +141,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
-                     <center>
-                        <PasswordField fx:id="passfieldPasswortBestaetigen" promptText="---" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets left="7.0" right="7.0" />
-                           </BorderPane.margin>
-                        </PasswordField>
-                     </center>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
-                     <left>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort bestätigen:" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets left="7.0" />
-                           </BorderPane.margin>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Text>
-                     </left>
-                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9" />
                </children>
             </GridPane>
          </children>

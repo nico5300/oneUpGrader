@@ -48,6 +48,27 @@
                 <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <left>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-Mail:" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <BorderPane.margin>
+                              <Insets left="7.0" />
+                           </BorderPane.margin>
+                        </Text>
+                     </left>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <center>
+                        <TextField fx:id="txtfieldEmail" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="7.0" right="7.0" />
+                           </BorderPane.margin>
+                        </TextField>
+                     </center>
+                  </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <left>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort:" BorderPane.alignment="CENTER">
@@ -69,28 +90,6 @@
                         </PasswordField>
                      </center>
                   </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                     <center>
-                        <TextField fx:id="txtfieldEmail" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets left="7.0" right="7.0" />
-                           </BorderPane.margin>
-                        </TextField>
-                     </center>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <left>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <BorderPane.margin>
-                              <Insets left="7.0" />
-                           </BorderPane.margin>
-                        </Text>
-                     </left>
-                  </BorderPane>
                   <Button fx:id="btnAnmelden" mnemonicParsing="false" onAction="#onAnmeldenClicked" text="anmelden" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="7.0" top="10.0" />
@@ -107,11 +106,12 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
                </children>
             </GridPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                <left>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anmeldung" BorderPane.alignment="CENTER">
+                  <Text fx:id="textAnmeldung" strokeType="OUTSIDE" strokeWidth="0.0" text="Anmeldung" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets left="7.0" />
                      </BorderPane.margin>
