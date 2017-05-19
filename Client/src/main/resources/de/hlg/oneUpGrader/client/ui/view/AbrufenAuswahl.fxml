@@ -59,7 +59,7 @@
                <children>
                   <GridPane gridLinesVisible="true">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="207.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="207.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="713.0" minWidth="10.0" prefWidth="713.0" />
                     </columnConstraints>
                     <rowConstraints>

@@ -3,6 +3,7 @@ package de.hlg.oneUpGrader.client.ui.controller;
 import de.hlg.oneUpGrader.client.dbConnection.AbrufenAuswahlQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
 import de.hlg.oneUpGrader.client.ui.view.AnmeldenView;
+import de.hlg.oneUpGrader.client.ui.view.HochladenView;
 import de.hlg.oneUpGrader.client.ui.view.VerifizierenAuswahlView;
 import javafx.collections.FXCollections;
 import javafx.concurrent.WorkerStateEvent;
@@ -13,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
-import javax.swing.*;
 import java.util.HashMap;
 
 /**
@@ -96,7 +96,15 @@ public class MainWindowController {
 
     @FXML
     private void onHochladenClick(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Hochladen Stage öffnen");
+        //JOptionPane.showMessageDialog(null, "Hochladen Stage öffnen");
+
+        //HochladenQuery fehlt
+
+        HochladenView hView = new HochladenView();
+        Stage stage1 = (Stage) (btnHochladen.getScene().getWindow());
+        Scene scene = new Scene(hView.getView());
+        stage1.setScene(scene);
+        stage1.show();
 
     }
 }
