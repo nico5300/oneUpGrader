@@ -16,15 +16,17 @@ import java.util.Optional;
  * Created by Michael on 08.05.17.
  */
 
-public class VerifizierenQuery extends Task<Void> {
+public class VerifizierenQuery extends Task<Prüfung> {
 
     String query1 = "SELECT PrüfungsID FROM Verifiziert ORDER BY VerifiziertID;"; //Herausfinden der zu verifizierenden Prüfung
     String query2 = "SELECT * FROM Prüfungen WHERE PrüfungsID = ?;";
     String query3 = "SELECT Name FROM Fach WHERE FachID = ?";
     String query4 = "SELECT Nachname, Vorname FROM Lehrer WHERE LehrerID = ?";
 
+    Prüfung test;
+
     @Override
-    protected Void call() throws SQLException, IOException {
+    protected Prüfung call() throws SQLException, IOException {
         DbConnection datenbank = DbConnection.getInstance();
 
         Optional<PreparedStatement> opt = datenbank.getPreparedStatement(query1);
@@ -54,12 +56,12 @@ public class VerifizierenQuery extends Task<Void> {
             }
 
             ResultSet ergebnis2 = prep2.getResultSet();
-
+            BufferedImage bild = null;
             if(ergebnis2.next())
             {
                 Blob blob = ergebnis2.getBlob(8);
                 try {
-                    BufferedImage bild = ImageIO.read(blob.getBinaryStream());
+                    bild = ImageIO.read(blob.getBinaryStream());
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (SQLException e) {
@@ -87,9 +89,10 @@ public class VerifizierenQuery extends Task<Void> {
 
                 ResultSet ergebnis3 = prep3.getResultSet();
 
+                String fach = "Nicht auflösbar!";
                 if(ergebnis3.next())
                 {
-                    String fach = ergebnis3.getString(1);
+                    fach = ergebnis3.getString(1);
                 }
 
                 Optional<PreparedStatement> opt4 = datenbank.getPreparedStatement(query4);
@@ -99,12 +102,17 @@ public class VerifizierenQuery extends Task<Void> {
 
                 ResultSet ergebnis4 = prep4.getResultSet();
 
+                String lehrer;
+                String lehrerVorname = "Nicht ";
+                String lehrerNachname = "auflösbar!";
                 if(ergebnis4.next())
                 {
-                    String lehrerNachname = ergebnis4.getString(1);
-                    String lehrerVorname = ergebnis4.getString(2);
+                    lehrerNachname = ergebnis4.getString(1);
+                    lehrerVorname = ergebnis4.getString(2);
                 }
-
+                lehrer = lehrerVorname + lehrerNachname;
+                test = new Prüfung(fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
+                return test;
             }
         }
 
