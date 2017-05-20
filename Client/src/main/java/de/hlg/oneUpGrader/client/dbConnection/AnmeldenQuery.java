@@ -12,7 +12,8 @@ import java.util.Optional;
  */
 public class AnmeldenQuery extends Task<Boolean> {
 
-    private String query1 = "SELECT Email, Passwort FROM Anwender WHERE Email = ? AND Passwort = ?;";
+    private String query1 = "SELECT * FROM Anwender WHERE Email = ? AND Passwort = ?;";
+
     private String username;
     private String passwort;
 
@@ -25,28 +26,25 @@ public class AnmeldenQuery extends Task<Boolean> {
     protected Boolean call() throws SQLException {
         DbConnection datenbank = DbConnection.getInstance();
 
-                              //Datenbank Abfrage aus Variablen und SQL zusammenbauen
+        Optional<PreparedStatement> opt = datenbank.getPreparedStatement(query1);
+        PreparedStatement queryComplete = opt.get();
 
-        Optional<PreparedStatement> optStatement = datenbank.getPreparedStatement(query1);
-        if(!optStatement.isPresent()) {
-            System.out.println("Konnte das PreparedStatement nicht erzeugen im AnmeldenQuery");
-            return false;
-        }
-        PreparedStatement statement = optStatement.get();
-        statement.setString(1, username);
-        statement.setString(2, passwort);
+        queryComplete.setString(1, username);
+        queryComplete.setString(2, passwort);
+
+
         try {
-            statement.execute();
+            queryComplete.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }                                                   //Abfrage ausführen oder Fehler
 
-        ResultSet ergebnis = statement.getResultSet();      //Ergebnistabelle der Abfrage
+        ResultSet ergebnis = queryComplete.getResultSet();      //Ergebnistabelle der Abfrage
 
         if(ergebnis.next())
         {
-            String userergebnis = ergebnis.getString("Email");
-            String passwortergebnis = ergebnis.getString("Passwort");        //Auslesen des Ergebnisses
+            String userergebnis = ergebnis.getString(0);
+            String passwortergebnis = ergebnis.getString(1);        //Auslesen des Ergebnisses
 
             if(userergebnis == username && passwortergebnis == passwort)
             {
@@ -55,12 +53,5 @@ public class AnmeldenQuery extends Task<Boolean> {
 
         }
         return false;                                                           // sonst -> false
-    }
-
-
-    public void execute() {
-        Thread thread = new Thread(this);
-        thread.setDaemon(true);
-        thread.start();
     }
 }
