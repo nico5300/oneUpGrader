@@ -47,8 +47,8 @@ public class AnmeldenQuery extends Task<Boolean> {
 
         if(ergebnis.next())
         {
-            String userergebnis = ergebnis.getString(0);
-            String passwortergebnis = ergebnis.getString(1);        //Auslesen des Ergebnisses
+            String userergebnis = ergebnis.getString("Email");
+            String passwortergebnis = ergebnis.getString("Passwort");        //Auslesen des Ergebnisses
 
             if(userergebnis.equals(username) && passwortergebnis.equals(passwort))
             {

@@ -141,4 +141,9 @@ public class AbrufenQuery extends Task<Void>{
         observerList.add(handler);
     }
 
+    public void execute() {
+        Thread thread = new Thread(this);
+        thread.setDaemon(true);
+        thread.start();
+    }
 }

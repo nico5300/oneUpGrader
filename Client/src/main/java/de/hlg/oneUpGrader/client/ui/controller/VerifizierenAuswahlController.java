@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by nico on 04.05.17.
+ * Created by Miran on 04.05.17.
  */
 public class VerifizierenAuswahlController {
 

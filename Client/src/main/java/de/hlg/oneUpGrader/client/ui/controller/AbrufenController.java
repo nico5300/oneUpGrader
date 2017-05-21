@@ -3,9 +3,11 @@ package de.hlg.oneUpGrader.client.ui.controller;
 import com.airhacks.afterburner.views.FXMLView;
 import de.hlg.oneUpGrader.client.UpdateHandler;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,7 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by nico on 19.04.17.
+ * Created by miran on 09.04.17.
  */
 public class AbrufenController implements Initializable, UpdateHandler<FXMLView>{
 
@@ -62,6 +64,8 @@ public class AbrufenController implements Initializable, UpdateHandler<FXMLView>
 
 
     @Override
+
+    //wird von fx automatisch aufgerufen und holt aus der injectionmap die daten für die labels
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(!fachString.isEmpty())
             lbFach.setText(fachString);
@@ -77,9 +81,13 @@ public class AbrufenController implements Initializable, UpdateHandler<FXMLView>
             lbJahrgang.setText("<beliebig>");
     }
 
-
+//wird aus query aufgerufen ... vbox ist die liste mit ergebnissen in der view ... get children sind die inhalte der vbox... obj ist das neue ergebnis das eingefügt werden soll
     @Override
+    //public void handle(FXMLView obj) {vbox.getChildren().add(obj.getView());
     public void handle(FXMLView obj) {
-        vbox.getChildren().add(obj.getView());
+        getCondom().add(obj.getView());
     }
+
+
+    public ObservableList<Node> getCondom() {return vbox.getChildren();}
 }

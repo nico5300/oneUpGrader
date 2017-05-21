@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import java.util.HashMap;
 
 /**
- * Created by Nico on 08.04.17.
+ * Created by Miran on 08.04.17.
  */
 public class MainWindowController {
 

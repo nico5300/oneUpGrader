@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import javax.inject.Inject;
 
 /**
- * Created by Jakob on 19.05.2017.
+ * Created by Jakob/Miran on 19.05.2017.
  */
 public class HochladenController {
     @FXML

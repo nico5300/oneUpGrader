@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by Jakob on 11.05.2017.
+ * Created by Miran on 11.05.2017.
  */
 public class AnmeldenController {
     @FXML
@@ -36,18 +36,25 @@ public class AnmeldenController {
         //code here
         // Debug: damit man die anderen Fenster auch erreichen kann......
 
+
+        //
         AnmeldenQuery query = new AnmeldenQuery(txtfieldEmail.getText(), passfieldPasswort.getText());
 
-        query.setOnScheduled((stateEvent) -> { // Wenn der Query Thread gestartet wird
+        //stateEvent muss hingeschriebenwerden ... ist egal
+        // query ist abgeleitet von task und task ausführbar ....wird als thread behandelt/es ist ein thread
+        //setOnScheduled((stateEvent) -> wird ausgeführt wenn der thread kurz davor ist ausgeführt zu werden
+        //wenn der thread der query gestartet wird und die anmeldung läuft
+        // darf niemand auf die buttons klicken!
+        query.setOnScheduled((stateEvent) -> {
 
             textAnmeldung.setText("Anmeldevorgang läuft...");
             btnAnmelden.setDisable(true);
             btnRegistrieren.setDisable(true);
-            txtfieldEmail.setDisable(true);     // Damit, während die Abfrage läuft, nicht
-            passfieldPasswort.setDisable(true); // rumgeklickt werden kann
-
+            txtfieldEmail.setDisable(true);
+            passfieldPasswort.setDisable(true);
         });
 
+        //wird ausgeführt wenn der thread ausgeführt ist
         query.setOnSucceeded((stateEvent) -> {
             if( ! query.getValue()) { // ACHTUNG!!!!!! AUSRUFEZEICHEN NACHHER ENTFERNEN --BISHER DEBUG--
                 MainWindowView view = new MainWindowView();

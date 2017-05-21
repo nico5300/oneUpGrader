@@ -1,6 +1,5 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
-import de.hlg.oneUpGrader.client.dbConnection.AnmeldenQuery;
 import de.hlg.oneUpGrader.client.ui.view.AnmeldenView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +11,7 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by Jakob on 11.05.2017.
+ * Created by Miran on 11.05.2017.
  */
 public class RegistrierenController {
 
