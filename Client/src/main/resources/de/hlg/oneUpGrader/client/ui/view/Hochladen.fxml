@@ -3,8 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -88,17 +88,17 @@
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <center>
-                              <ComboBox fx:id="cboxLehrer" editable="true" onAction="#setCboxLehrerList" prefHeight="35.0" prefWidth="713.0" BorderPane.alignment="CENTER" />
+                              <ComboBox fx:id="cboxLehrer" editable="true" prefHeight="35.0" prefWidth="713.0" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <center>
-                              <ComboBox fx:id="cboxFach" editable="true" onAction="#setCboxFachList" prefHeight="35.0" prefWidth="713.0" BorderPane.alignment="CENTER" />
+                              <ComboBox fx:id="cboxFach" editable="true" prefHeight="35.0" prefWidth="713.0" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <center>
-                              <ComboBox fx:id="cboxJahrgangsstufe" onAction="#setCboxJahrgangsstufelList" prefHeight="35.0" prefWidth="713.0" BorderPane.alignment="CENTER" />
+                              <ComboBox fx:id="cboxJahrgangsstufe" prefHeight="35.0" prefWidth="713.0" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -121,12 +121,12 @@
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <center>
-                              <TextField fx:id="txtfieldDatum" prefHeight="35.0" prefWidth="713.0" BorderPane.alignment="CENTER" />
+                              <DatePicker fx:id="datepckDatum" editable="false" prefHeight="35.0" prefWidth="713.0" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <center>
-                              <ComboBox fx:id="cboxArt" onAction="#setCboxArtList" prefHeight="35.0" prefWidth="713.0" BorderPane.alignment="CENTER" />
+                              <ComboBox fx:id="cboxArt" prefHeight="35.0" prefWidth="713.0" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">

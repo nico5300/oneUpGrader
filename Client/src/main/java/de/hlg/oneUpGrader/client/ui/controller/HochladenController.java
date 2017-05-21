@@ -1,18 +1,17 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.collections.ObservableList;
+import javafx.stage.Stage;
 
 import javax.inject.Inject;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-
-import javafx.event.ActionEvent;
 
 /**
  * Created by Jakob on 19.05.2017.
@@ -40,7 +39,7 @@ public class HochladenController {
     private ComboBox cboxArt;
 
     @FXML
-    private TextField txtfieldDatum;
+    private DatePicker datepckDatum;
 
     @FXML
     private Label labelPruefungDatei;
@@ -76,7 +75,7 @@ public class HochladenController {
 
         //Injection bzw. ObservableList Work left
 
-        Stage stage1 = (Stage)(txtfieldDatum.getScene().getWindow());
+        Stage stage1 = (Stage)(datepckDatum.getScene().getWindow());
         MainWindowView mView = new MainWindowView();
         Scene scene = new Scene(mView.getView());
         stage1.setScene(scene);

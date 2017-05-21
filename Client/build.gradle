@@ -49,4 +49,3 @@ task createAll {
     jar.execute()
     runJar.execute()
 }
-

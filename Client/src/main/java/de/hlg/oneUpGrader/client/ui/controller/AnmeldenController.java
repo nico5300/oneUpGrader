@@ -34,7 +34,7 @@ public class AnmeldenController {
     @FXML
     public void onAnmeldenClicked(ActionEvent e) {
         //code here
-        // Debug: damit man die anderen Fenster auch erreichen kann,
+        // Debug: damit man die anderen Fenster auch erreichen kann......
 
         AnmeldenQuery query = new AnmeldenQuery(txtfieldEmail.getText(), passfieldPasswort.getText());
 
@@ -49,8 +49,7 @@ public class AnmeldenController {
         });
 
         query.setOnSucceeded((stateEvent) -> {
-
-/*---hier--*/if(  query.getValue()) { // ACHTUNG!!!!!! AUSRUFEZEICHEN NACHHER ENTFERNEN --BISHER DEBUG--
+            if( ! query.getValue()) { // ACHTUNG!!!!!! AUSRUFEZEICHEN NACHHER ENTFERNEN --BISHER DEBUG--
                 MainWindowView view = new MainWindowView();
                 Stage currentStage = (Stage) txtfieldEmail.getScene().getWindow();
                 Stage newStage = new Stage();
@@ -62,8 +61,7 @@ public class AnmeldenController {
                 // TODO: 17.05.17 username iwo speichern...
 
             } else {
-
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Falscher Benutzername, falsches Passwort\n oder keine " +
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Falscher Benutzername, falsches Passwort oder keine " +
                         "Datenbankverbindung!", ButtonType.OK);
                 alert.initModality(Modality.APPLICATION_MODAL);
                 alert.showAndWait();

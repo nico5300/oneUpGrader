@@ -96,9 +96,15 @@ public class MainWindowController {
 
     @FXML
     private void onHochladenClick(ActionEvent e) {
-        //JOptionPane.showMessageDialog(null, "Hochladen Stage öffnen");
+
 
         //HochladenQuery fehlt
+
+        injectionMap.put("lehrerList", FXCollections.observableArrayList());
+        injectionMap.put("fachList", FXCollections.observableArrayList());
+        injectionMap.put("jahrgangList", FXCollections.observableArrayList());
+        injectionMap.put("artList", FXCollections.observableArrayList());
+
 
         HochladenView hView = new HochladenView();
         Stage stage1 = (Stage) (btnHochladen.getScene().getWindow());
