@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hlg.oneUpGrader.client.ui.controller.AnmeldenController">
+<AnchorPane prefHeight="400.0" prefWidth="320.0" styleClass="anmelden.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hlg.oneUpGrader.client.ui.controller.AnmeldenController">
    <children>
       <GridPane gridLinesVisible="true" layoutX="60.0" layoutY="155.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <columnConstraints>
@@ -90,7 +90,7 @@
                         </PasswordField>
                      </center>
                   </BorderPane>
-                  <Button fx:id="btnAnmelden" mnemonicParsing="false" onAction="#onAnmeldenClicked" text="anmelden" GridPane.rowIndex="5">
+                  <Button fx:id="btnAnmelden" mnemonicParsing="false" onAction="#onAnmeldenClicked" stylesheets="@oneUpStyle.css" text="anmelden" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="7.0" top="10.0" />
                      </GridPane.margin>
@@ -98,7 +98,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnRegistrieren" mnemonicParsing="false" onAction="#onRegistrierenClicked" text="registrieren" GridPane.rowIndex="6">
+                  <Button id="registrieren-button" fx:id="btnRegistrieren" mnemonicParsing="false" onAction="#onRegistrierenClicked" styleClass="registrieren-button" stylesheets="@oneUpStyle.css" text="registrieren" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="7.0" top="10.0" />
                      </GridPane.margin>
