@@ -1,12 +1,14 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
+import de.hlg.oneUpGrader.client.ui.view.VerifizierenView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
 
 /**
  * Created by nico on 04.05.17.
@@ -52,7 +54,11 @@ public class VerifizierenAuswahlController {
 
     @FXML
     public void onBewertenClicked(ActionEvent e) {
-
+        VerifizierenView vView = new VerifizierenView();
+        Stage st = (Stage) (btnBack.getScene().getWindow());
+        Scene scene = new Scene(vView.getView());
+        st.setScene(scene);
+        st.show();
     }
 
 

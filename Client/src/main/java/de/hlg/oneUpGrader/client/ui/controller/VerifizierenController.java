@@ -1,4 +1,4 @@
-package main.java.de.hlg.oneUpGrader.client.ui.controller;
+package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
 import javafx.event.ActionEvent;
@@ -35,13 +35,23 @@ public class VerifizierenController {
     private Button btnInOrdnung;
 
     @FXML
-    public void onMangelhaftClicked(ActionEvent e) {
-        //code here
+    public void onMangelhaftClick(ActionEvent e) {
+        MainWindowView mView = new MainWindowView();
+        Stage stage = (Stage) (labelArt.getScene().getWindow());
+        Scene scene = new Scene(mView.getView());
+        stage.setScene(scene);
+        stage.show();
+        //todo erstellen der VerifizierenErgebnisSendenQuery
     }
 
     @FXML
-    public void onInOrdnungClicked(ActionEvent e) {
-        //code here
+    public void onInOrdnungClick(ActionEvent e) {
+        MainWindowView mView = new MainWindowView();
+        Stage stage = (Stage) (labelArt.getScene().getWindow());
+        Scene scene = new Scene(mView.getView());
+        stage.setScene(scene);
+        stage.show();
+        //todo erstellen der VerifizierenErgebnisSendenQuery
     }
 
 }
