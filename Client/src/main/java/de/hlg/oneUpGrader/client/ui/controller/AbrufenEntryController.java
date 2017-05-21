@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by nico on 20.04.17.
+ * Created by Nico on 20.04.17.
  */
 public class AbrufenEntryController {
     @FXML

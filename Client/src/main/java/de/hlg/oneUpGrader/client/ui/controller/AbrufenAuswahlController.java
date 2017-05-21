@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 
 /**
- * Created by nico on 09.04.17.
+ * Created by Nico on 09.04.17.
  */
 @SuppressWarnings("unchecked") // Das ist hier in Ordnung............
 public class AbrufenAuswahlController implements Initializable {
@@ -62,6 +62,8 @@ public class AbrufenAuswahlController implements Initializable {
     @Inject
     private int jahrgangInt;
 
+
+//Anmelden Query verwendet die methoden um zeug in die dropdownboxen einzufügen (in der view die auswahlmöglichkeiten)
     void setCboxLehrerList(ObservableList<String> list) {
         cboxLehrer.setItems(list);
     }
@@ -76,6 +78,8 @@ public class AbrufenAuswahlController implements Initializable {
 
     @FXML
     public void onBackClicked(ActionEvent e) {
+
+        //die Ergebnisse (Referenzen) sollen neu geladen werden wenn man raus und wieder rein geht
         injectionMap.remove("jahrgangList");
         injectionMap.remove("fachList");
         injectionMap.remove("lehrerList");
@@ -100,6 +104,7 @@ public class AbrufenAuswahlController implements Initializable {
 
         try {
             if(!cboxJahrgang.getEditor().getText().isEmpty())
+                //der eingegebene string wird zu einem integer gemacht
                 jahrgangInt = Integer.parseInt(cboxJahrgang.getEditor().getText());
 
 
@@ -127,19 +132,21 @@ public class AbrufenAuswahlController implements Initializable {
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
+        // injectionmap ist eine art datenbank von fx und da werden die 3 attribute zwischengespeichert ... der AbrufenController hohlt sie sich dann
         injectionMap.put("lehrerString", lehrerString);
         injectionMap.put("fachString", fachString);
         injectionMap.put("jahrgangInt", jahrgangInt);
 
+        //die klasse kümmert sich um die abzurufenden ergebnisse
         AbrufenQuery query = new AbrufenQuery(lehrerString, fachString, jahrgangInt);
 
 
         AbrufenView view = new AbrufenView();
+
+        //meldet diesen controller bei der query an die dann so bericht erstatten kann wenn ein ergebnis fertig ist um in die view eingefügt zu werden
         query.addObserver( (UpdateHandler<FXMLView>) view.getPresenter());
         //.........weil hier oben nur AbrufenController rauskommen, die UpdateHandler implementieren!
-        Thread thread = new Thread(query);
-        thread.setDaemon(true);
-        thread.start();
+        query.execute();
 
         Stage st = (Stage) cboxFach.getScene().getWindow();
         Scene scene  = new Scene(view.getView());
@@ -149,6 +156,8 @@ public class AbrufenAuswahlController implements Initializable {
 
 
     @Override
+
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(cboxJahrgang.getItems().isEmpty())       // Diese Abfragen verhindern das Entstehen einer
             cboxJahrgang.setItems(jahrgangList);    // Race-Condition, die durch die vorzeitige
