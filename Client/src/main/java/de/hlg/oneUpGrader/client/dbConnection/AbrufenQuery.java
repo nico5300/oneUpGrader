@@ -40,7 +40,7 @@ public class AbrufenQuery extends Task<Void>{
 
     private String jahrgangStringQuery = "&& ? = Prüfungen.Jahrgangsstufe ";
 
-    private String lehrerStringQuery = "&& CONCAT(Lehrer.Vorname, ' ', Lehrer.Nachname)" +
+    private String lehrerStringQuery = "&& Lehrer.Name" +
                                                     " LIKE CONCAT('%', ?, '%') ";
 
     private String fachStringQuery = "&& Fach.Name LIKE CONCAT('%', ?, '%') ";

@@ -1,6 +1,9 @@
 package de.hlg.oneUpGrader.client.dbConnection;
 
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 import java.sql.*;
 import java.util.Optional;
 
@@ -65,6 +68,8 @@ public class DbConnection {
             System.out.println("Connected...");
         } catch (SQLException e) {
             e.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR, "Datenbankverbindung klappt nicht!", ButtonType.OK);
+            a.show();
         }
 
 

@@ -24,7 +24,7 @@ public class AbrufenEntryController {
     private Button btnKaufen;
 
     private int prüfungsID;
-    private int prüfungsTyp; // 1 = Klausur, 2 = Schulaufgabe, 3 = Test, 4 = Ex, keine enums weil man die Dinger nicht in MySQL reinkriegt
+    private int prüfungsTyp; // 1 = Klausur, Schux (großer Nachweis); 0 = Ex, Test... (kleiner Nachweis); keine enums weil man die Dinger nicht in MySQL reinkriegt
     private Date datum = Calendar.getInstance().getTime();
 
 
@@ -46,24 +46,17 @@ public class AbrufenEntryController {
         StringBuilder builder = new StringBuilder(30); // StringBuilder ist effizienter...
         int kosten;                                       // sonst gäbs ihn ja ned
         switch (prüfungsTyp) {
-            case 1:
-                builder.append("Klausur ");
-                kosten = 5;
-                break;
-            case 2:
-                builder.append("Schulaufgabe ");
-                kosten = 5;
-                break;
-            case 3:
-                builder.append("Test ");
-                kosten = 4;
-                break;
-            case 4:
-                builder.append("Ex ");
+            case 0:
+                builder.append("Kleine Prüfung ");
                 kosten = 3;
                 break;
-            default:
-                kosten = 0;
+            case 1:
+                builder.append("Große Prüfung ");
+                kosten = 5;
+                break;
+                default:
+                    builder.append("Woah, Technology failed!!");    // Fehler... sollte nie passieren
+                    kosten = 0;
         }
         builder.append("vom ");
         builder.append(DateFormat.getDateInstance(DateFormat.DATE_FIELD, Locale.getDefault()).format(datum)); // Mach Datum schön...

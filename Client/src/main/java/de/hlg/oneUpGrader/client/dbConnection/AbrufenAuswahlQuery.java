@@ -42,13 +42,13 @@ public class AbrufenAuswahlQuery extends Task<Void> {
                     " das ResultSet nicht bekommen hab");
         }
 
-        Optional<ResultSet> optLehrerResult = conn.executeQuery("SELECT Vorname, Nachname FROM Lehrer;");
+        Optional<ResultSet> optLehrerResult = conn.executeQuery("SELECT Name FROM Lehrer;");
 
         if(optLehrerResult.isPresent()) {
 
             ResultSet lehrerResult = optLehrerResult.get();
             while (lehrerResult.next()) {
-                lehrerList.add(lehrerResult.getString(1) + " " + lehrerResult.getString(2));
+                lehrerList.add(lehrerResult.getString(1));
             }
         }
 
