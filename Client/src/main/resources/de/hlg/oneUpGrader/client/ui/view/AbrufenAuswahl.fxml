@@ -42,7 +42,7 @@
             </Text>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <left>
-                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="48.0" prefWidth="48.0" text="&lt;--" BorderPane.alignment="CENTER">
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="48.0" prefWidth="48.0" stylesheets="@RechteckButton.css" text="&lt;--" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font></Button>

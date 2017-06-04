@@ -26,7 +26,7 @@
           <RowConstraints maxHeight="435.0" minHeight="10.0" prefHeight="417.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnBack" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBackClick" prefHeight="48.0" prefWidth="48.0" text="&lt;--">
+            <Button fx:id="btnBack" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBackClick" prefHeight="48.0" prefWidth="48.0" stylesheets="@RechteckButton.css" text="&lt;--">
                <font>
                   <Font size="16.0" />
                </font></Button>

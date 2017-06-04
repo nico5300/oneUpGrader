@@ -18,7 +18,16 @@
     -fx-border-width: 2px;
 }
 
-/*.combo-box {
+/*
+.grid {
+    -fx-background-color: rgb(171,220,156);
+}
+
+.pane {
+    -fx-background-color: rgb(224,225,215);
+}
+
+.combo-box {
     -fx-border-color: rgb(51, 102, 0);
     -fx-border-width: 1px;
     -fx-background-color: linear-gradient( rgb(205, 255, 179), rgb(85, 255, 0));
@@ -34,9 +43,9 @@
 
 .combo-box:focused {
     -fx-border-width: 2px;
-}*/
+}
 
-/*
+
 .text-field {
     -fx-text-box-border: rgb(51, 102, 0);
 }
@@ -44,3 +53,5 @@
 .text-field:focused {
     -fx-border-width: 2px;
 }*/
+
+
