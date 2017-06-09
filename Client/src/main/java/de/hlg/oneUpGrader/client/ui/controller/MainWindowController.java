@@ -100,6 +100,7 @@ public class MainWindowController {
         injectionMap.put("lehrerList", FXCollections.observableArrayList());
         injectionMap.put("fachList", FXCollections.observableArrayList());
         injectionMap.put("jahrgangList", FXCollections.observableArrayList());
+        injectionMap.put("artList", FXCollections.observableArrayList());
         //combo.getItems.add(0);
 
         HochladenView hView = new HochladenView();

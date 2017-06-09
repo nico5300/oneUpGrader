@@ -16,6 +16,7 @@ import javax.inject.Inject;
 /**
  * Created by Jakob/Miran on 19.05.2017.
  */
+@SuppressWarnings("unchecked")
 public class HochladenController {
     @FXML
     private Button btnBack;
@@ -64,7 +65,7 @@ public class HochladenController {
         cboxFach.setItems(list);
     }
 
-    void setCboxJahrgangstufeList(ObservableList<String> list) {
+    void setCboxJahrgangList(ObservableList<String> list) {
         cboxJahrgangsstufe.setItems(list);
     }
 
@@ -89,7 +90,7 @@ public class HochladenController {
 
     @FXML
     public void onHochladenClick(ActionEvent e) {
-        //todo
+        //todo @Jakob: Wenn du die HochladenQuery benutzen willst, ruf mich an und frag einfach
     }
 
 }
