@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@oneUpStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hlg.oneUpGrader.client.ui.controller.VerifizierenAuswahlController">
    <children>
-      <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="20.0" styleClass="lightgreenbackground" stylesheets="@oneUpStyle.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -24,7 +24,7 @@
           <RowConstraints maxHeight="435.0" minHeight="10.0" prefHeight="417.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnBack" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="48.0" prefWidth="48.0" text="&lt;--">
+            <Button fx:id="btnBack" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="48.0" prefWidth="48.0" styleClass="rechteckbutton" stylesheets="@oneUpStyle.css" text="&lt;--">
                <font>
                   <Font size="16.0" />
                </font></Button>
@@ -54,7 +54,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <GridPane gridLinesVisible="true">
+                  <GridPane gridLinesVisible="true" styleClass="lightbackground" stylesheets="@oneUpStyle.css">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="207.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="713.0" minWidth="10.0" prefWidth="713.0" />

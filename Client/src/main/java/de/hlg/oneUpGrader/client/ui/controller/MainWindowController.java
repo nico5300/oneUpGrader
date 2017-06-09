@@ -97,20 +97,36 @@ public class MainWindowController {
     @FXML
     private void onHochladenClick(ActionEvent e) {
 
-
-        //HochladenQuery fehlt
-
         injectionMap.put("lehrerList", FXCollections.observableArrayList());
         injectionMap.put("fachList", FXCollections.observableArrayList());
         injectionMap.put("jahrgangList", FXCollections.observableArrayList());
-        injectionMap.put("artList", FXCollections.observableArrayList());
-
+        //combo.getItems.add(0);
 
         HochladenView hView = new HochladenView();
         Stage stage1 = (Stage) (btnHochladen.getScene().getWindow());
         Scene scene = new Scene(hView.getView());
         stage1.setScene(scene);
         stage1.show();
+
+        AbrufenAuswahlQuery aaq = new AbrufenAuswahlQuery();
+
+        aaq.setOnSucceeded( (WorkerStateEvent t) -> {
+            HochladenController controller = (HochladenController) hView.getPresenter();
+            controller.setCboxLehrerList(aaq.getLehrerList());
+            controller.setCboxFachList(aaq.getFachList());
+            controller.setCboxJahrgangList(aaq.getJahrgangList());
+
+            injectionMap.remove("lehrerlist");
+            injectionMap.remove("fachList");
+            injectionMap.remove("jahrgangList");
+            injectionMap.put("lehrerlist", aaq.getLehrerList());
+            injectionMap.put("fachList", aaq.getFachList());
+            injectionMap.put("jahrgangList", aaq.getJahrgangList());
+        });
+
+        Thread t = new Thread(aaq);
+        t.setDaemon(true);
+        t.start();
 
     }
 }
