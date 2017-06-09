@@ -6,6 +6,7 @@
     -fx-background-radius: 13px;
 
 }
+
 .button:hover {
     -fx-background-color: linear-gradient( rgb(236, 255, 223), rgb(85, 255, 0));
 }
@@ -17,6 +18,24 @@
 .button:focused {
     -fx-border-width: 2px;
 }
+
+.root {
+    -fx-background-color: linear-gradient( rgb(219, 255, 195), rgb(164, 255, 118));
+}
+
+.lightbackground {
+    -fx-background-color: rgb(255, 255, 255);
+}
+
+.lightgreenbackground {
+    -fx-background-color: rgb(243, 255, 235);
+}
+
+.rechteckbutton {
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+}
+
 
 /*
 .grid {
