@@ -9,7 +9,11 @@ import java.util.Optional;
 
 /**
  * Created by Michael on 12.05.2017.
- */
+
+    Übergabe von Benutername und Passwort im Konstruktur
+    Rückggabe, ob Richtig oder Falsch als Boolean
+
+*/
 public class AnmeldenQuery extends Task<Boolean> {
 
     private String query1 = "SELECT * FROM Anwender WHERE Email = ? AND Passwort = ?;";
@@ -27,10 +31,6 @@ public class AnmeldenQuery extends Task<Boolean> {
         DbConnection datenbank = DbConnection.getInstance();
 
         Optional<PreparedStatement> opt = datenbank.getPreparedStatement(query1);
-        if(!opt.isPresent()) {
-            System.out.println("Konnte das PreparedStatement nicht erzeugen im AnmeldenQuery");
-            return false;
-        }
         PreparedStatement queryComplete = opt.get();
 
         queryComplete.setString(1, username);
@@ -47,10 +47,10 @@ public class AnmeldenQuery extends Task<Boolean> {
 
         if(ergebnis.next())
         {
-            String userergebnis = ergebnis.getString("Email");
-            String passwortergebnis = ergebnis.getString("Passwort");        //Auslesen des Ergebnisses
+            String userergebnis = ergebnis.getString(0);
+            String passwortergebnis = ergebnis.getString(1);        //Auslesen des Ergebnisses
 
-            if(userergebnis.equals(username) && passwortergebnis.equals(passwort))
+            if(userergebnis == username && passwortergebnis == passwort)
             {
                 return true;                                                    //Wenn user und passwort richtig -> true
             }
@@ -58,11 +58,10 @@ public class AnmeldenQuery extends Task<Boolean> {
         }
         return false;                                                           // sonst -> false
     }
-
-
+    
     public void execute() {
-        Thread thread = new Thread(this);
-        thread.setDaemon(true);
-        thread.start();
+        Thread t = new Thread(this);
+        t.setDaemon(true);
+        t.start();
     }
 }

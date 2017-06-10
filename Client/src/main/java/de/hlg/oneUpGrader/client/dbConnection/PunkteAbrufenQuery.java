@@ -7,9 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
+
 /**
  * Created by Michael on 12.05.2017.
+ 
+ Übergabe der Emailadresse
+ Rückgabe der Punktezahl als Integer
  */
+
 public class PunkteAbrufenQuery extends Task<Integer> {
 
     String query1 = "SELECT Punkte FROM Anwender WHERE Email = '";
@@ -46,9 +51,13 @@ public class PunkteAbrufenQuery extends Task<Integer> {
             return Integer.valueOf(punkte);                         //Ergebnis(Anzahl der Punkte des Users) zurückgeben
         }
 
-        return 0;                                                   //Wenn Fehler -> immer 0
+        return 0;                                                   //Wenn Fehler
     }
 
-
+    public void execute() {
+        Thread t = new Thread(this);
+        t.setDaemon(true);
+        t.start();
+    }
 
 }

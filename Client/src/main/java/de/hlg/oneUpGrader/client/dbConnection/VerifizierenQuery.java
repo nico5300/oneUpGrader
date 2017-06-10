@@ -14,6 +14,9 @@ import java.util.Optional;
 
 /**
  * Created by Michael on 08.05.17.
+ 
+ Aufrufen dieser Klasse bei Klick auf Prüfung Verifizieren Button
+ Rückgabe eines Objekts vom Typ Prüfung 
  */
 
 public class VerifizierenQuery extends Task<Prüfung> {
@@ -22,13 +25,18 @@ public class VerifizierenQuery extends Task<Prüfung> {
     String query2 = "SELECT * FROM Prüfungen WHERE PrüfungsID = ?;";
     String query3 = "SELECT Name FROM Fach WHERE FachID = ?";
     String query4 = "SELECT Nachname, Vorname FROM Lehrer WHERE LehrerID = ?";
+    String query5 = "SELECT * FROM Prüfungen WHERE Verifiziert = false ORDER BY PrüfungsID";
 
     Prüfung test;
+    String PrüfungsID;
 
     @Override
     protected Prüfung call() throws SQLException, IOException {
         DbConnection datenbank = DbConnection.getInstance();
 
+
+        //----------------------------------------------
+        // Richtige Prüfung herausfinden
         Optional<PreparedStatement> opt = datenbank.getPreparedStatement(query1);
         PreparedStatement prep1 = opt.get();
 
@@ -38,12 +46,33 @@ public class VerifizierenQuery extends Task<Prüfung> {
             e.printStackTrace();
         }
 
-        ResultSet ergebnis = prep1.getResultSet();
+        ResultSet ergebnis = prep1.getResultSet();                  //Überprüfen ob bereits teilweise
+                                                                    //verifizierte Prüfung existiert
+        if(ergebnis.next()) {
+            PrüfungsID = ergebnis.getString(0);
+        }
+        else {
+            Optional<PreparedStatement> opt5 = datenbank.getPreparedStatement(query5);
+            PreparedStatement prep5 = opt5.get();
 
-        if(ergebnis.next())
-        {
-            String PrüfungsID = ergebnis.getString(0);
+            try {
+                prep5.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ResultSet ergebnis5 = prep5.getResultSet();
+            if(ergebnis5.next()) {
+                PrüfungsID = ergebnis5.getString("PrüfungsID");
+            }                                                       //Ansonsten überprüfen ob noch gar nicht
+                                                                    //verifizierte Prüfungen existieren
+            else {
+                return null;
+            }                                                       //keine zu verifizierende Prüfung
 
+        }
+
+        //-----------------------------------------
+        // Prüfung herunterladen und abspeichern
             Optional<PreparedStatement> opt2 = datenbank.getPreparedStatement(query2);
             PreparedStatement prep2 = opt2.get();
 
@@ -55,7 +84,7 @@ public class VerifizierenQuery extends Task<Prüfung> {
                 e.printStackTrace();
             }
 
-            ResultSet ergebnis2 = prep2.getResultSet();
+            ResultSet ergebnis2 = prep2.getResultSet();                     //Prüfung herunterladen
             BufferedImage bild = null;
             if(ergebnis2.next())
             {
@@ -73,8 +102,12 @@ public class VerifizierenQuery extends Task<Prüfung> {
                 int jahrgangsstufe = ergebnis2.getInt(4);
                 Date datum = ergebnis2.getDate(5);
                 boolean art = ergebnis2.getBoolean(6);
-                String beschreibung = ergebnis2.getString(7);
+                String beschreibung = ergebnis2.getString(7);               //Prüfung in Variablen speichern
 
+
+
+                //---------------------------------------------
+                //FachID durch Fachnamen ersetzen
 
                 Optional<PreparedStatement> opt3 = datenbank.getPreparedStatement(query3);
                 PreparedStatement prep3 = opt3.get();
@@ -95,6 +128,8 @@ public class VerifizierenQuery extends Task<Prüfung> {
                     fach = ergebnis3.getString(1);
                 }
 
+                //-------------------------------------------
+                // LehrerID durch Lehrernamen ersetzen
                 Optional<PreparedStatement> opt4 = datenbank.getPreparedStatement(query4);
                 PreparedStatement prep4 = opt4.get();
 
@@ -111,12 +146,21 @@ public class VerifizierenQuery extends Task<Prüfung> {
                     lehrerVorname = ergebnis4.getString(2);
                 }
                 lehrer = lehrerVorname + lehrerNachname;
-                test = new Prüfung(fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
+
+                //Prüfungsobjekt erzeugen
+                test = new Prüfung(PrüfungsID, fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
+                //Prüfung zurückgeben
                 return test;
             }
-        }
+
 
 
         return null;
+    }
+    
+    public void execute() {
+        Thread t = new Thread(this);
+        t.setDaemon(true);
+        t.start();
     }
 }
