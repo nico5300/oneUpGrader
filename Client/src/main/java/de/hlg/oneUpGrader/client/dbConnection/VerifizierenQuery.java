@@ -14,6 +14,9 @@ import java.util.Optional;
 
 /**
  * Created by Michael on 08.05.17.
+ 
+ Aufrufen dieser Klasse bei Klick auf Prüfung Verifizieren Button
+ Rückgabe eines Objekts vom Typ Prüfung 
  */
 
 public class VerifizierenQuery extends Task<Prüfung> {
@@ -153,5 +156,11 @@ public class VerifizierenQuery extends Task<Prüfung> {
 
 
         return null;
+    }
+    
+    public void execute() {
+        Thread t = new Thread(this);
+        t.setDaemon(true);
+        t.start();
     }
 }
