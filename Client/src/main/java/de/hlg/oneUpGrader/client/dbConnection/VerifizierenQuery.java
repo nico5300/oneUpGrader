@@ -19,6 +19,7 @@ import java.util.Optional;
  Rückgabe eines Objekts vom Typ Prüfung 
  */
 
+
 public class VerifizierenQuery extends Task<Prüfung> {
 
     String query1 = "SELECT PrüfungsID FROM Verifiziert ORDER BY VerifiziertID;"; //Herausfinden der zu verifizierenden Prüfung
@@ -28,7 +29,7 @@ public class VerifizierenQuery extends Task<Prüfung> {
     String query5 = "SELECT * FROM Prüfungen WHERE Verifiziert = false ORDER BY PrüfungsID";
 
     Prüfung test;
-    String PrüfungsID;
+    int PrüfungsID;
 
     @Override
     protected Prüfung call() throws SQLException, IOException {
@@ -49,7 +50,7 @@ public class VerifizierenQuery extends Task<Prüfung> {
         ResultSet ergebnis = prep1.getResultSet();                  //Überprüfen ob bereits teilweise
                                                                     //verifizierte Prüfung existiert
         if(ergebnis.next()) {
-            PrüfungsID = ergebnis.getString(0);
+            PrüfungsID = ergebnis.getInt(0);
         }
         else {
             Optional<PreparedStatement> opt5 = datenbank.getPreparedStatement(query5);
@@ -62,7 +63,7 @@ public class VerifizierenQuery extends Task<Prüfung> {
             }
             ResultSet ergebnis5 = prep5.getResultSet();
             if(ergebnis5.next()) {
-                PrüfungsID = ergebnis5.getString("PrüfungsID");
+                PrüfungsID = ergebnis5.getInt("PrüfungsID");
             }                                                       //Ansonsten überprüfen ob noch gar nicht
                                                                     //verifizierte Prüfungen existieren
             else {
@@ -76,7 +77,7 @@ public class VerifizierenQuery extends Task<Prüfung> {
             Optional<PreparedStatement> opt2 = datenbank.getPreparedStatement(query2);
             PreparedStatement prep2 = opt2.get();
 
-            prep2.setString(1, PrüfungsID);
+            prep2.setInt(1, PrüfungsID);
 
             try {
                 prep2.execute();
@@ -148,20 +149,17 @@ public class VerifizierenQuery extends Task<Prüfung> {
                 lehrer = lehrerVorname + lehrerNachname;
 
                 //Prüfungsobjekt erzeugen
-                //test = new Prüfung(PrüfungsID, fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
-                test = new Prüfung( fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
+                test = new Prüfung(PrüfungsID, fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
                 //Prüfung zurückgeben
                 return test;
             }
 
-
-
         return null;
     }
-    
     public void execute() {
         Thread t = new Thread(this);
         t.setDaemon(true);
         t.start();
     }
 }
+
