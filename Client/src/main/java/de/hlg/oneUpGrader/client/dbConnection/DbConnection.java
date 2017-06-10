@@ -28,7 +28,7 @@ public class DbConnection {
 
 
     private static int whichServer = 2; // 1 = DNS:raspberrypi, 2 = root@localhost, 3 gregers.ddns.net
-                                        // 4 = hlg-win.de
+                                        // 4 = hlg-win.de, 5 = NAS
 
     public static synchronized DbConnection getInstance() { // Mach DbConnection zu nem Singleton
         if(instance == null) {
@@ -63,6 +63,9 @@ public class DbConnection {
                     break;
                 case 4:
                     connection = DriverManager.getConnection(hlgUrl, hlgUser, hlgPassword);
+                    break;
+                case 5:
+                    connection = DriverManager.getConnection("jdbc:mysql://mariusbushido.ddns.net:6033/oneUpGrader?verifyServerCertificate=false&useSSL=true&requireSSL=true&useTimezone=false", "java", "javapassword123");
             }
             working = true;
             System.out.println("Connected...");

@@ -1,10 +1,11 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
-import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -13,22 +14,19 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Created by Jakob on 19.05.2017.
  */
 @SuppressWarnings("unchecked")
-public class HochladenController {
+public class HochladenController implements Initializable{
 
     //ObservableList<String> artList;
 
     public HochladenController() {
-        artList = FXCollections.observableArrayList();
 
-        artList.add("kleiner Leistungsnachweis");
-        artList.add("großer Leistungsnachweis");
-
-        setCboxArtList(artList);
     }
 
     @FXML
@@ -104,4 +102,13 @@ public class HochladenController {
         //todo @Jakob: Wenn du die HochladenQuery benutzen willst, ruf mich an und frag einfach
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        artList = FXCollections.observableArrayList();
+
+        artList.add("kleiner Leistungsnachweis");
+        artList.add("großer Leistungsnachweis");
+
+        setCboxArtList(artList);
+    }
 }

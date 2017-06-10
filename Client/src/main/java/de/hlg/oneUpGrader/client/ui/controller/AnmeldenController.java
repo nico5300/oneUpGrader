@@ -68,7 +68,7 @@ public class AnmeldenController {
                 // TODO: 17.05.17 username iwo speichern...
 
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Falscher Benutzername, falsches Passwort oder keine " +
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Falscher Benutzername, falsches Passwort\noder keine " +
                         "Datenbankverbindung!", ButtonType.OK);
                 alert.initModality(Modality.APPLICATION_MODAL);
                 alert.showAndWait();
