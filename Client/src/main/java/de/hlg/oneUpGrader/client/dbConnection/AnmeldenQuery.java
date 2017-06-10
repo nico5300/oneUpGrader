@@ -11,7 +11,7 @@ import java.util.Optional;
  * Created by Michael on 12.05.2017.
 
     Übergabe von Benutername und Passwort im Konstruktur
-    Rückggabe, ob Richtig oder Falsch als Boolean
+    Rückgabe, ob Richtig oder Falsch als Boolean
 
 */
 public class AnmeldenQuery extends Task<Boolean> {
@@ -47,10 +47,10 @@ public class AnmeldenQuery extends Task<Boolean> {
 
         if(ergebnis.next())
         {
-            String userergebnis = ergebnis.getString(0);
-            String passwortergebnis = ergebnis.getString(1);        //Auslesen des Ergebnisses
+            String userergebnis = ergebnis.getString("Email");
+            String passwortergebnis = ergebnis.getString("Passwort");        //Auslesen des Ergebnisses
 
-            if(userergebnis == username && passwortergebnis == passwort)
+            if(userergebnis.equals(username) && passwortergebnis.equals(passwort))
             {
                 return true;                                                    //Wenn user und passwort richtig -> true
             }

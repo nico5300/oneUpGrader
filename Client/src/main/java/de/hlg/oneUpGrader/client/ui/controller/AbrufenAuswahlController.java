@@ -62,6 +62,8 @@ public class AbrufenAuswahlController implements Initializable {
     @Inject
     private int jahrgangInt;
 
+    @Inject
+    private String currentUser;
 
 //Anmelden Query verwendet die methoden um zeug in die dropdownboxen einzufügen (in der view die auswahlmöglichkeiten)
     void setCboxLehrerList(ObservableList<String> list) {
@@ -138,7 +140,7 @@ public class AbrufenAuswahlController implements Initializable {
         injectionMap.put("jahrgangInt", jahrgangInt);
 
         //die klasse kümmert sich um die abzurufenden ergebnisse
-        AbrufenQuery query = new AbrufenQuery(lehrerString, fachString, jahrgangInt);
+        AbrufenQuery query = new AbrufenQuery(lehrerString, fachString, jahrgangInt, currentUser);
 
 
         AbrufenView view = new AbrufenView();

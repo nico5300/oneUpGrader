@@ -11,6 +11,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.inject.Inject;
+import java.util.HashMap;
+
 
 /**
  * Created by Jakob on 11.05.2017.
@@ -30,6 +33,9 @@ public class AnmeldenController {
 
     @FXML
     private PasswordField passfieldPasswort;
+
+    @Inject
+    private HashMap<String, Object> injectionMap;
 
     @FXML
     public void onAnmeldenClicked(ActionEvent e) {
@@ -56,7 +62,10 @@ public class AnmeldenController {
 
         //wird ausgeführt wenn der thread ausgeführt ist
         query.setOnSucceeded((stateEvent) -> {
-            if( ! query.getValue()) { // ACHTUNG!!!!!! AUSRUFEZEICHEN NACHHER ENTFERNEN --BISHER DEBUG--
+            if(  query.getValue()) { // ACHTUNG!!!!!! AUSRUFEZEICHEN NACHHER ENTFERNEN --BISHER DEBUG--
+
+                injectionMap.put("currentUser", txtfieldEmail.getText());
+
                 MainWindowView view = new MainWindowView();
                 Stage currentStage = (Stage) txtfieldEmail.getScene().getWindow();
                 Stage newStage = new Stage();
@@ -65,7 +74,6 @@ public class AnmeldenController {
                 newStage.setScene(scene);
                 newStage.show();
                 currentStage.close();       // Hier hat es funktioniert, User wurde eingeloggt
-                // TODO: 17.05.17 username iwo speichern...
 
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Falscher Benutzername, falsches Passwort\noder keine " +

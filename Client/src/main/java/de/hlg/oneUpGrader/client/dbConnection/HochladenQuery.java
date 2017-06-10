@@ -6,13 +6,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import javax.imageio.ImageIO;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.time.ZoneId;
-import java.util.Date;
 import java.util.Optional;
 
 
@@ -219,11 +220,5 @@ public class HochladenQuery extends Task<Boolean> {
     }
 
 
-    public static void main(String[] args) throws Exception{
 
-        DbConnection conn = DbConnection.getInstance();
-        System.out.println(new HochladenQuery(new Prüfung("Informatik", "Hans Vader", 11, Date.from(Instant.now()),
-                false, "bla", ImageIO.read(new File("/home/nico/Bilder/Screenshot.png")))).call());
-
-    }
 }

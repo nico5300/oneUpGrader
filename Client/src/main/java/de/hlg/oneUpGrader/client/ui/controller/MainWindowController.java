@@ -38,7 +38,9 @@ public class MainWindowController {
 
     @FXML
     public void onAbmeldenClicked(ActionEvent e) {
-        //passwort aus memory löschen 
+        // currentUser aus memory löschen
+        injectionMap.remove("currentUser");
+
         AnmeldenView view = new AnmeldenView();
         Stage currentStage = ((Stage) (btnVerifizieren.getScene().getWindow()));
         Stage newStage = new Stage();
