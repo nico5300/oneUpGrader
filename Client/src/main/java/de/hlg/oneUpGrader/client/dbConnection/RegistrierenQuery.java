@@ -10,6 +10,9 @@ import java.util.Optional;
 
 /**
  * Created by Michael on 01.06.2017.
+ 
+ Übergabe von Emailadresse und Passwort
+ Rückgabe ob erfolgreich registriert oder nicht als Boolean
  */
 
 public class RegistrierenQuery extends Task<Boolean> {
@@ -61,5 +64,11 @@ public class RegistrierenQuery extends Task<Boolean> {
         {
             return false;
         }
+    }
+    
+    public void execute() {
+        Thread t = new Thread(this);
+        t.setDaemon(true);
+        t.start();
     }
 }
