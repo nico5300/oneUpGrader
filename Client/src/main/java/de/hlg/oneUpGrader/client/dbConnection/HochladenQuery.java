@@ -10,10 +10,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.Optional;
 
 
@@ -176,7 +176,8 @@ public class HochladenQuery extends Task<Boolean> {
             insertStatement.setInt(2, lehrerIndex);
             insertStatement.setInt(3, prüfung.getJahrgangsstufe());
             // Das sind die Momente, in denen ich Java hasse.... Datum und Zeit ist DIE HÖLLE
-            insertStatement.setDate(4, java.sql.Date.valueOf(prüfung.getDatum().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+            //insertStatement.setDate(4, java.sql.Date.valueOf(prüfung.getDatum().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+            insertStatement.setDate(4, new Date(prüfung.getDatum().getTime()));
             insertStatement.setBoolean(5, prüfung.getArt());
             insertStatement.setString(6, prüfung.getBeschreibung());
 

@@ -28,6 +28,17 @@ public class Prüfung {
         bild = g;
     }
 
+    public Prüfung(String fach, String lehrer, int jahrgangsstufe, Date datum, boolean art, String beschreibung, BufferedImage img) {
+        PrüfungsID = -1;
+        this.fach = fach;
+        this.lehrer = lehrer;
+        this.jahrgangsstufe = jahrgangsstufe;
+        this.datum = datum;
+        this.art = art;
+        this.beschreibung = beschreibung;
+        this.bild = img;
+    }
+
     public void setPrüfungsID(int x) {PrüfungsID = x; }
 
     public void setFach(String x)

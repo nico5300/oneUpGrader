@@ -46,20 +46,27 @@ public class RegistrierenController {
             return;
         }
 
-        RegistrierenQuery rq = new RegistrierenQuery(txtfieldEmail.getText(), passfieldPasswort());
+        RegistrierenQuery rq = new RegistrierenQuery(txtfieldEmail.getText(), passfieldPasswort.getText());
+        rq.setOnSucceeded((event) -> {
 
-        if (rq.execute() == false) {
-            Alert al2 = new Alert(Alert.AlertType.ERROR, "Benutzername nicht verfügbar!", ButtonType.OK);
-            al2.show();
-            return;
-        }
-        else
-        {
-            Alert al3 = new Alert(Alert.AlertType.INFORMATION, "Registrierung erfolgreich.", ButtonType.OK);
-            al3.show();
-            return;
-        }
+            if (!rq.getValue()) {
+                Alert al2 = new Alert(Alert.AlertType.ERROR, "Benutzername nicht verfügbar!", ButtonType.OK);
+                al2.show();
+                return;
+            }
+            else
+            {
+                Alert al3 = new Alert(Alert.AlertType.INFORMATION, "Registrierung erfolgreich.", ButtonType.OK);
+                al3.show();
+                return;
+            }
 
+        });
+
+
+
+
+        rq.execute();
 
     }
 

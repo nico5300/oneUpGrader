@@ -1,14 +1,14 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
+import de.hlg.oneUpGrader.client.dbConnection.AnmeldenQuery;
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
 import de.hlg.oneUpGrader.client.ui.view.RegistrierenView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
@@ -40,22 +40,6 @@ public class AnmeldenController {
     @FXML
     public void onAnmeldenClicked(ActionEvent e) {
 
-        MainWindowView view = new MainWindowView();
-        Stage currentStage = (Stage) txtfieldEmail.getScene().getWindow();
-        Stage newStage = new Stage();
-        newStage.setTitle(  currentStage.getTitle() );
-        Scene scene = new Scene(view.getView());
-        newStage.setScene(scene);
-        newStage.show();
-        currentStage.close();       // Hier hat es funktioniert, User wurde eingeloggt
-        /*
-
-
-        //code here
-        // Debug: damit man die anderen Fenster auch erreichen kann......
-
-
-        //
         AnmeldenQuery query = new AnmeldenQuery(txtfieldEmail.getText(), passfieldPasswort.getText());
 
         //stateEvent muss hingeschriebenwerden ... ist egal
@@ -72,7 +56,7 @@ public class AnmeldenController {
             passfieldPasswort.setDisable(true);
         });
 
-        //wird ausgeführt wenn der thread ausgeführt ist
+        //wird ausgeführt wenn der thread beendet wurde
         query.setOnSucceeded((stateEvent) -> {
             if(  query.getValue()) { // ACHTUNG!!!!!! AUSRUFEZEICHEN NACHHER ENTFERNEN --BISHER DEBUG--
 
@@ -101,7 +85,7 @@ public class AnmeldenController {
         });
 
         query.execute();
-        */
+
 
     }
 

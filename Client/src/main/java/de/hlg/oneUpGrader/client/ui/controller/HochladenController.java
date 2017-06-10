@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -137,15 +136,24 @@ public class HochladenController implements Initializable {
         System.out.println(sArt);
 
 
-        if ((fach != null) &&                                         //überprüfen ob alle Eingaben gemacht wurden
-            (lehrer != null) &&
+        if ((fach != null || !fach.isEmpty()) &&                                         //überprüfen ob alle Eingaben gemacht wurden
+            (lehrer != null || !lehrer.isEmpty()) &&
             (sjahrgang != null) &&
-            (ldatum != null &&
+            (ldatum != null) &&
             (sArt != null) &&
-            (labelPruefungsDatei.getText().compareTo("---") != 0)))
-        {
+            (labelPruefungsDatei.getText().compareTo("---") != 0)) {
 
-            int jahrgang = Integer.parseInt(sjahrgang);                     //umwandlung des sjahrgangstrings in ein int
+            int jahrgang = 0;                     //umwandlung des sjahrgangstrings in ein int
+            try {
+                jahrgang = Integer.parseInt(sjahrgang);     // Bitte nur ZAHLEN von 5 bis 12 (eingeschlossen)
+
+                if(jahrgang < 5 || jahrgang > 12)
+                    throw new NumberFormatException();
+            } catch (NumberFormatException e1) {
+                Alert al = new Alert(Alert.AlertType.ERROR, "Beim Jahrgang nur Zahlen von\n5 bis 12 (eingeschlossen)!", ButtonType.OK);
+                al.show();
+                return;
+            }
 
             java.util.Date datum = java.sql.Date.valueOf(ldatum);           //umwandlung des Localdate Objekts in ein Date objekt
 
@@ -153,10 +161,12 @@ public class HochladenController implements Initializable {
             try {
                 img = ImageIO.read(file);                                   //umwandlung der file Datei in eine image Datei
             } catch (IOException r) {
+                Alert al = new Alert(Alert.AlertType.ERROR, "Fehler beim Einlesen der Bilddatei!", ButtonType.OK);
+                al.show();
             }
 
 
-            boolean art = true;
+            boolean art;
 
             if (sArt.compareTo("großer Leistungsnachweis") == 0) {          //"umwandlung" des Strings der Combobox in ein boolean
                 art = true;
@@ -168,7 +178,12 @@ public class HochladenController implements Initializable {
 
             Prüfung pruefung = new Prüfung(fach, lehrer, jahrgang, datum, art, beschreibung, img);          //Arstellen einer Prüfung
 
-            HochladenQuery hq = new HochladenQuery(pruefung);                                               //Ausführen der Query
+            HochladenQuery hq = new HochladenQuery(pruefung);   //Ausführen der Query
+
+            hq.setOnSucceeded(event -> {        // Nico will ein wenig Debugmeldung haben..... Kann später weg
+                System.out.println(hq.getValue());
+            });
+
             hq.execute();
 
         }
