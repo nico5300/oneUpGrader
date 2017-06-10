@@ -14,18 +14,17 @@ import java.util.Optional;
 
 /**
  * Created by Michael on 08.05.17.
- 
+
  Aufrufen dieser Klasse bei Klick auf Prüfung Verifizieren Button
  Rückgabe eines Objekts vom Typ Prüfung 
  */
-
 
 public class VerifizierenQuery extends Task<Prüfung> {
 
     String query1 = "SELECT PrüfungsID FROM Verifiziert ORDER BY VerifiziertID;"; //Herausfinden der zu verifizierenden Prüfung
     String query2 = "SELECT * FROM Prüfungen WHERE PrüfungsID = ?;";
     String query3 = "SELECT Name FROM Fach WHERE FachID = ?";
-    String query4 = "SELECT Nachname, Vorname FROM Lehrer WHERE LehrerID = ?";
+    String query4 = "SELECT * FROM Lehrer WHERE LehrerID = ?";
     String query5 = "SELECT * FROM Prüfungen WHERE Verifiziert = false ORDER BY PrüfungsID";
 
     Prüfung test;
@@ -138,15 +137,13 @@ public class VerifizierenQuery extends Task<Prüfung> {
 
                 ResultSet ergebnis4 = prep4.getResultSet();
 
-                String lehrer;
-                String lehrerVorname = "Nicht ";
-                String lehrerNachname = "auflösbar!";
+                String lehrer = "Nicht auflösbar";
+
                 if(ergebnis4.next())
                 {
-                    lehrerNachname = ergebnis4.getString(1);
-                    lehrerVorname = ergebnis4.getString(2);
+                    lehrer = ergebnis4.getString("Name");
+
                 }
-                lehrer = lehrerVorname + lehrerNachname;
 
                 //Prüfungsobjekt erzeugen
                 test = new Prüfung(PrüfungsID, fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
@@ -162,4 +159,3 @@ public class VerifizierenQuery extends Task<Prüfung> {
         t.start();
     }
 }
-
