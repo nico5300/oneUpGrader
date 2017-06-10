@@ -27,7 +27,7 @@ public class DbConnection {
     private String hlgPassword = "rqavyu";
 
 
-    private static int whichServer = 2; // 1 = DNS:raspberrypi, 2 = root@localhost, 3 gregers.ddns.net
+    private static int whichServer = 5; // 1 = DNS:raspberrypi, 2 = root@localhost, 3 gregers.ddns.net
                                         // 4 = hlg-win.de, 5 = NAS
 
     public static synchronized DbConnection getInstance() { // Mach DbConnection zu nem Singleton
