@@ -1,6 +1,6 @@
 package de.hlg.oneUpGrader.client.dbConnection;
 
-
+import com.sun.xml.internal.ws.util.ReadAllStream;
 import javafx.concurrent.Task;
 
 import java.sql.PreparedStatement;
@@ -10,9 +10,9 @@ import java.util.Optional;
 
 /**
  * Created by Michael on 01.06.2017.
- 
- Übergabe von Emailadresse und Passwort
- Rückgabe ob erfolgreich registriert oder nicht als Boolean
+ * 
+ * Übergabe von Useremail und Passwort
+ * Rückgabe ob Registrierung erfolgreich
  */
 
 public class RegistrierenQuery extends Task<Boolean> {
@@ -26,7 +26,7 @@ public class RegistrierenQuery extends Task<Boolean> {
     {
         email = e;
         passwort = p;
-    } 
+    }
 
     protected Boolean call() throws SQLException {
         DbConnection datenbank = DbConnection.getInstance();
@@ -35,7 +35,7 @@ public class RegistrierenQuery extends Task<Boolean> {
         PreparedStatement queryComplete = opt.get();
 
         queryComplete.setString(1, email);
- 
+
 
         try {
             queryComplete.execute();
@@ -65,7 +65,7 @@ public class RegistrierenQuery extends Task<Boolean> {
             return false;
         }
     }
-    
+
     public void execute() {
         Thread t = new Thread(this);
         t.setDaemon(true);

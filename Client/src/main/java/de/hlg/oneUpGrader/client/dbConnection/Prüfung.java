@@ -7,24 +7,28 @@ import java.util.Date;
  * Created by Michael on 20.05.2017.
  */
 public class Prüfung {
-    private String fach;
-    private String lehrer;
-    private int jahrgangsstufe;
-    private Date datum;
-    private boolean art;
-    private String beschreibung;
-    private BufferedImage bild;
+    int PrüfungsID;
+    String fach;
+    String lehrer;
+    int jahrgangsstufe;
+    Date datum;
+    boolean art;
+    String beschreibung;
+    BufferedImage bild;
 
-    public Prüfung(String fach, String lehrer, int jahrgangsstufe,
-                   Date datum, boolean art, String beschreibung, BufferedImage img) {
-        this.fach = fach;
-        this.lehrer = lehrer;
-        this.jahrgangsstufe = jahrgangsstufe;
-        this.datum = datum;
-        this.art = art;
-        this.beschreibung = beschreibung;
-        this.bild = img;
+    public Prüfung(int TestID, String a, String b, int c, Date d, boolean e, String f, BufferedImage g)
+    {
+        PrüfungsID = TestID;
+        fach = a;
+        lehrer = b;
+        jahrgangsstufe = c;
+        datum = d;
+        art = e;
+        beschreibung = f;
+        bild = g;
     }
+
+    public void setPrüfungsID(int x) {PrüfungsID = x; }
 
     public void setFach(String x)
     {
@@ -60,6 +64,8 @@ public class Prüfung {
     {
         bild = x;
     }
+
+    public int getPrüfungsID() { return PrüfungsID; }
 
     public String getFach()
     {
