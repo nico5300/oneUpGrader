@@ -26,7 +26,7 @@ public class RegistrierenQuery extends Task<Boolean> {
     {
         email = e;
         passwort = p;
-    }
+    } 
 
     protected Boolean call() throws SQLException {
         DbConnection datenbank = DbConnection.getInstance();
