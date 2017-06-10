@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
  * Created by Jakob on 19.05.2017.
  */
 @SuppressWarnings("unchecked")
-public class HochladenController implements Initializable{
+public class HochladenController implements Initializable {
 
     @FXML
     private Button btnBack;
@@ -50,7 +50,7 @@ public class HochladenController implements Initializable{
     private DatePicker datepckDatum;
 
     @FXML
-    private Label labelPruefungDatei;
+    private Label labelPruefungsDatei;
 
     @Inject
     private ObservableList<String> jahrgangList;
@@ -103,7 +103,7 @@ public class HochladenController implements Initializable{
         File file = choosefile();
         String st = file.getAbsolutePath();
         System.out.println(st);
-        labelPruefungDatei.setText("hi");
+        labelPruefungsDatei.setText("hi");
 
 
     }

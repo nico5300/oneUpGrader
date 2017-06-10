@@ -148,7 +148,8 @@ public class VerifizierenQuery extends Task<Prüfung> {
                 lehrer = lehrerVorname + lehrerNachname;
 
                 //Prüfungsobjekt erzeugen
-                test = new Prüfung(PrüfungsID, fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
+                //test = new Prüfung(PrüfungsID, fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
+                test = new Prüfung( fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
                 //Prüfung zurückgeben
                 return test;
             }
