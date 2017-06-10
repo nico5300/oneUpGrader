@@ -29,7 +29,7 @@ public class RegistrierenController {
     @FXML
     private Button btnZurAnmeldung;
 
-    @FXML
+
     /**
      * @param ActionEvent
      * @Authot Jakob
@@ -38,6 +38,7 @@ public class RegistrierenController {
      * Wenn ja, dann wird mit der RegistrierenQuery in der Datenbank ein neuer Benutzer erstellt.
      * Ist der Benutzername jedoch nicht mehr verfügber, so gibt es eine Fehlermeldung.
      */
+    @FXML
     public void onRegistrierenClicked(ActionEvent e) {
 
         if ((passfieldPasswort.getText().compareTo(passfieldPasswortBestaetigen.getText())) != 0) {
@@ -58,6 +59,7 @@ public class RegistrierenController {
             {
                 Alert al3 = new Alert(Alert.AlertType.INFORMATION, "Registrierung erfolgreich.", ButtonType.OK);
                 al3.show();
+                onZurAnmeldungClicked(e);
                 return;
             }
 

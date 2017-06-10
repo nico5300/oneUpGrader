@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 
 public class Main extends Application {
-    private String ver = "0.0.4 <TEST>";
+    private String ver = "0.0.5 <TEST>";
 
     public static void main(String[] args) {
         launch(args);

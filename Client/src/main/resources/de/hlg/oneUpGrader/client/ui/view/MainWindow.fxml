@@ -51,7 +51,7 @@
                               <Insets bottom="10.0" left="5.0" right="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="  OneUpGrader 0.0.4">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="  OneUpGrader 0.0.5">
                            <font>
                               <Font size="42.0" />
                            </font>
