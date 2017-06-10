@@ -2,6 +2,7 @@ package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
 import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -14,10 +15,22 @@ import javafx.stage.Stage;
 import javax.inject.Inject;
 
 /**
- * Created by Jakob/Miran on 19.05.2017.
+ * Created by Jakob on 19.05.2017.
  */
 @SuppressWarnings("unchecked")
 public class HochladenController {
+
+    //ObservableList<String> artList;
+
+    public HochladenController() {
+        artList = FXCollections.observableArrayList();
+
+        artList.add("kleiner Leistungsnachweis");
+        artList.add("großer Leistungsnachweis");
+
+        setCboxArtList(artList);
+    }
+
     @FXML
     private Button btnBack;
 
@@ -73,8 +86,6 @@ public class HochladenController {
 
     @FXML
     public void onBackClick(ActionEvent e){
-
-        //Injection bzw. ObservableList Work left
 
         Stage stage1 = (Stage)(datepckDatum.getScene().getWindow());
         MainWindowView mView = new MainWindowView();

@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by Miran on 11.05.2017.
+ * Created by Jakob on 11.05.2017.
  */
 public class RegistrierenController {
 
@@ -31,13 +31,39 @@ public class RegistrierenController {
     private Button btnZurAnmeldung;
 
     @FXML
+    /**
+     * @param ActionEvent
+     * @return null
+     *
+     * Es wird zunächst überprüft, ob die Passwörter in beiden Passwortfeldern identisch sind.
+     * Wenn ja, dann wird mit der RegistrierenQuery in der Datenbank ein neuer Benutzer erstellt.
+     * Ist der Benutzername jedoch nicht mehr verfügber, so gibt es eine Fehlermeldung.
+     */
     public void onRegistrierenClicked(ActionEvent e) {
-        //code here
+
+        /*if ((passfieldPasswort.getText().compareTo(passfieldPasswortBestaetigen.getText())) != 0) {
+            Alert al = new Alert(Alert.AlertType.ERROR, "Passwörter sind nicht identisch!", ButtonType.OK);
+            al.show();
+            return;
+        }
+
+        RegistrierenQuery rq = new RegistrierenQuery(txtfieldEmail.getText(), passfieldPasswort());
+
+        if (rq.execute() == false) {
+            Alert al2 = new Alert(Alert.AlertType.ERROR, "Benutzername nicht verfügbar!", ButtonType.OK);
+            al2.show();
+            return;
+        }
+        else
+        {
+            Alert al3 = new Alert(Alert.AlertType.INFORMATION, "Registrierung erfolgreich.", ButtonType.OK);
+        }*/
+
+
     }
 
     @FXML
     public void onZurAnmeldungClicked(ActionEvent e) {
-        //code here
         AnmeldenView view = new AnmeldenView();
         Stage st = (Stage) btnRegistrieren.getScene().getWindow();
         Scene sc = new Scene(view.getView());

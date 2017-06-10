@@ -67,7 +67,7 @@
                         </ScrollPane>
                      </children>
                   </GridPane>
-                  <GridPane gridLinesVisible="true">
+                  <GridPane gridLinesVisible="true" stylesheets="@oneUpStyle.css">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="207.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -78,7 +78,7 @@
                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="lightbackground" stylesheets="@oneUpStyle.css">
                            <center>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Jahrgangsstufe:" BorderPane.alignment="CENTER">
                                  <font>
@@ -87,7 +87,7 @@
                               </Text>
                            </center>
                         </BorderPane>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="lightbackground" stylesheets="@oneUpStyle.css" GridPane.rowIndex="1">
                            <center>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fach:" BorderPane.alignment="CENTER">
                                  <font>
@@ -96,7 +96,7 @@
                               </Text>
                            </center>
                         </BorderPane>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="lightbackground" stylesheets="@oneUpStyle.css" GridPane.rowIndex="2">
                            <center>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lehrer:" BorderPane.alignment="CENTER">
                                  <font>
@@ -105,16 +105,16 @@
                               </Text>
                            </center>
                         </BorderPane>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="lightbackground" stylesheets="@oneUpStyle.css" GridPane.columnIndex="1">
                            <center>
-                              <Label fx:id="lbJahrgang" prefWidth="703.0" text="---" BorderPane.alignment="CENTER">
+                              <Label fx:id="lbJahrgang" prefWidth="703.0" stylesheets="@oneUpStyle.css" text="---" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
                            </center>
                         </BorderPane>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="lightbackground" stylesheets="@oneUpStyle.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <center>
                               <Label fx:id="lbFach" prefWidth="703.0" text="---" BorderPane.alignment="CENTER">
                                  <font>
@@ -123,7 +123,7 @@
                               </Label>
                            </center>
                         </BorderPane>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="lightbackground" stylesheets="@oneUpStyle.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <center>
                               <Label fx:id="lbLehrer" prefWidth="703.0" text="---" BorderPane.alignment="CENTER">
                                  <font>

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by Miran on 11.05.2017.
+ * Created by Jakob on 11.05.2017.
  */
 public class AnmeldenController {
     @FXML
