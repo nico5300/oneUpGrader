@@ -142,7 +142,7 @@
                   </GridPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <center>
-                        <Button fx:id="btnPruefungAuswaehlen" mnemonicParsing="false" onAction="#onPruefungAuswaehlenClick" prefHeight="50.0" prefWidth="300.0" text="Prüfung auswählen" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnPruefungAuswaehlen" mnemonicParsing="false" onAction="#onPruefungAuswaehlenClick" prefHeight="50.0" prefWidth="300.0" text="Bilder Auswählen" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
