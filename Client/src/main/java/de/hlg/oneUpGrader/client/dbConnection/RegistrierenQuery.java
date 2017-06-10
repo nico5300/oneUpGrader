@@ -35,7 +35,7 @@ public class RegistrierenQuery extends Task<Boolean> {
         PreparedStatement queryComplete = opt.get();
 
         queryComplete.setString(1, email);
-
+ 
 
         try {
             queryComplete.execute();
