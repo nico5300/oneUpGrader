@@ -10,6 +10,9 @@ import java.util.Optional;
 
 /**
  * Created by Michael on 12.05.2017.
+ 
+ Übergabe der Emailadresse
+ Rückgabe der Punktezahl als Integer
  */
 
 public class PunkteAbrufenQuery extends Task<Integer> {
@@ -51,6 +54,10 @@ public class PunkteAbrufenQuery extends Task<Integer> {
         return 0;                                                   //Wenn Fehler
     }
 
-
+    public void execute() {
+        Thread t = new Thread(this);
+        t.setDaemon(true);
+        t.start();
+    }
 
 }
