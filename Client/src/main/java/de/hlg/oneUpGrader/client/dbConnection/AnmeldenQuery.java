@@ -9,7 +9,11 @@ import java.util.Optional;
 
 /**
  * Created by Michael on 12.05.2017.
- */
+
+    Übergabe von Benutername und Passwort im Konstruktur
+    Rückggabe, ob Richtig oder Falsch als Boolean
+
+*/
 public class AnmeldenQuery extends Task<Boolean> {
 
     private String query1 = "SELECT * FROM Anwender WHERE Email = ? AND Passwort = ?;";
@@ -53,5 +57,11 @@ public class AnmeldenQuery extends Task<Boolean> {
 
         }
         return false;                                                           // sonst -> false
+    }
+    
+    public void execute() {
+        Thread t = new Thread(this);
+        t.setDaemon(true);
+        t.start();
     }
 }
