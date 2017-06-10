@@ -98,6 +98,11 @@ public class KaufenDownloadQuery extends Task<Prüfung> {
         {
             w = Punkte - 3;
         }
+        if(w < 0)
+        {
+            return null;                        //nicht genügend punkte 
+        }
+
         statement3.setInt(1,w);
         statement3.setString(2, email);
 
