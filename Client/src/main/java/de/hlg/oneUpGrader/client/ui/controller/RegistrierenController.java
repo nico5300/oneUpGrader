@@ -31,7 +31,7 @@ public class RegistrierenController {
 
 
     /**
-     * @param ActionEvent
+     * @param ActionEvent e
      * @Authot Jakob
      *
      * Es wird zunächst überprüft, ob die Passwörter in beiden Passwortfeldern identisch sind.
