@@ -1,6 +1,8 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.dbConnection.AbrufenAuswahlQuery;
+import de.hlg.oneUpGrader.client.dbConnection.Prüfung;
+import de.hlg.oneUpGrader.client.dbConnection.VerifizierenQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
 import de.hlg.oneUpGrader.client.ui.view.AnmeldenView;
 import de.hlg.oneUpGrader.client.ui.view.HochladenView;
@@ -51,13 +53,31 @@ public class MainWindowController {
         currentStage.close();
     }
 
+    /**
+     * Diese Methode wechselt die View zur VerifizierenAuswahlView und übergibt dem VerifizierenAuswahlController gleichzeitig
+     * die nächste zu verifizierende Prüfung die von der VerifizierenQuery zurückgegeben wird.
+     *
+     * @Author Jakob
+     * @param ActionEvent e
+     */
+
+
     @FXML
     private void onVerifizierenClick(ActionEvent e) {
-        VerifizierenAuswahlView view = new VerifizierenAuswahlView();
-        Stage st = ((Stage) (btnVerifizieren.getScene().getWindow()));
-        Scene scene = new Scene(view.getView());
-        st.setScene(scene);
-        st.show();
+        VerifizierenQuery vq = new VerifizierenQuery();
+
+        vq.setOnSucceeded((event) -> {
+            Prüfung p = vq.getValue();
+
+            injectionMap.put("VerifizierenPruefung", p);
+
+            VerifizierenAuswahlView view = new VerifizierenAuswahlView();
+            Stage st = ((Stage) (btnVerifizieren.getScene().getWindow()));
+            Scene scene = new Scene(view.getView());
+            st.setScene(scene);
+            st.show();
+
+        });
     }
 
     @FXML
