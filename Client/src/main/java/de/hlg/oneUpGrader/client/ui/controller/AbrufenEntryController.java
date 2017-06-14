@@ -67,6 +67,7 @@ public class AbrufenEntryController {
         onUpdate();
     }
 
+    // ein Updatehandler für Arme... Sorgt dafür, dass die View bei Änderung der Infos angepasst wird
     private void onUpdate() {
         StringBuilder builder = new StringBuilder(30); // StringBuilder ist effizienter...
         int kosten;                                       // sonst gäbs ihn ja ned
@@ -80,7 +81,7 @@ public class AbrufenEntryController {
                 kosten = 5;
                 break;
                 default:
-                    builder.append("Woah, Technology failed!!");    // Fehler... sollte nie passieren
+                    builder.append("Woah, Technology... failed!!");    // Fehler... sollte nie passieren
                     kosten = 0;
         }
         builder.append("vom ");
@@ -88,7 +89,7 @@ public class AbrufenEntryController {
 
         lbBeschreibung.setText(builder.toString());
 
-        if (gekauft) {
+        if (gekauft) {      // Wenn Prüfg. bereits gekauft, View anpassen
             lbPreis.setText("");
             lbInfo.setText("Bereits Gekauft");
             lbInfo.translateXProperty().set(-50.0);
@@ -110,14 +111,11 @@ public class AbrufenEntryController {
      * @Author Jakob
      * @param ActionEvent e
      */
-
-
     @FXML
     public void onButtonClicked(ActionEvent e) {
-
-        if (gekauft == false) {             //wenn die Prüfung vom User noch nicht gekauft wurde
-
+        if (!gekauft) {             //wenn die Prüfung vom User noch nicht gekauft wurde
             PunkteAbrufenQuery pq = new PunkteAbrufenQuery(currentUser);
+
 
             pq.setOnSucceeded((event) -> {
                 int punktestand = pq.getValue();                    //Abrufen des Punktestands
@@ -127,7 +125,7 @@ public class AbrufenEntryController {
                     if (punktestand < 5) {                              //wenn der User zu wenig Punkte hat für einen grpßen Leistungsnachweis
                         Alert al = new Alert(Alert.AlertType.ERROR, "Punktestand zu niedrig!", ButtonType.OK);
                         al.show();
-                        return;
+                        return; // Unnötig (ist letzte Anweisung einer void Methode) , aber leichter lesbar
                     } else {                                            //wenn er ausreichend Punkte hat
                         KaufenDownloadQuery kdq = new KaufenDownloadQuery(currentUser, prüfungsID);
 

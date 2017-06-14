@@ -17,8 +17,7 @@ import java.util.Optional;
 
 public class PunkteAbrufenQuery extends Task<Integer> {
 
-    String query1 = "SELECT Punkte FROM Anwender WHERE Email = '";
-    String query2 = "';";
+    String query1 = "SELECT Punkte FROM Anwender WHERE Email = ?";
     String username;
 
     public PunkteAbrufenQuery(String benutzer)
@@ -26,29 +25,44 @@ public class PunkteAbrufenQuery extends Task<Integer> {
         username = benutzer;
     }
 
-    protected Integer call() throws SQLException {
+    protected Integer call() {
         DbConnection datenbank = DbConnection.getInstance();
 
-        StringBuilder queryComplete = new StringBuilder();
-        queryComplete.append(query1);
-        queryComplete.append(username);
-        queryComplete.append(query2);                               //SQL Abfrage zusammenbauen
+                                     //SQL Abfrage zusammenbauen
 
-        Optional<PreparedStatement> optStatement = datenbank.getPreparedStatement(queryComplete.toString());
-        PreparedStatement statement = optStatement.get();
+        Optional<PreparedStatement> optStatement = datenbank.getPreparedStatement(query1.toString());
+        PreparedStatement statement;
+
+        if (optStatement.isPresent()) {
+            statement = optStatement.get();
+
+        } else {
+            System.out.println("Konnte PreparedStatement im PunkteAbrufenQuery nicht erstellen");
+            return -1;
+        }
+
 
         try {
+            statement.setString(1, username);
             statement.execute();
-        } catch (SQLException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }                                                           //Abfrage ausführen oder Fehler
 
-        ResultSet ergebnis = statement.getResultSet();              //Ergebnis abspeichern
+        try {
+            ResultSet ergebnis = statement.getResultSet();              //Ergebnis abspeichern
 
-        if(ergebnis.next())
-        {
-            int punkte = ergebnis.getInt(0);
-            return Integer.valueOf(punkte);                         //Ergebnis(Anzahl der Punkte des Users) zurückgeben
+            if(ergebnis.next())
+            {
+                int punkte = ergebnis.getInt(1);
+                return Integer.valueOf(punkte);                         //Ergebnis(Anzahl der Punkte des Users) zurückgeben
+            }
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Verarbeiten der Informationen im PunkteAbrufenQuery");
+            e.printStackTrace();
+            return -1;
         }
 
         return 0;                                                   //Wenn Fehler
