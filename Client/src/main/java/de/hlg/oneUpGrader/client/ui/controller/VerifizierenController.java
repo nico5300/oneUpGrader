@@ -5,21 +5,24 @@ import de.hlg.oneUpGrader.client.dbConnection.VerifizierenErgebnisSendenQuery;
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
+import java.net.URL;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 /**
  * Created by Jakob/Miran on 08.05.2017.
  */
-public class VerifizierenController {
+public class VerifizierenController implements Initializable{
 
     @Inject
     private HashMap<String, Object> injectionMap;
@@ -60,6 +63,11 @@ public class VerifizierenController {
      */
 
     public VerifizierenController() {
+        // Inititalisierung in initialize Methode
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         Prüfung p = VerifizierenPruefung;
 
 
@@ -104,6 +112,8 @@ public class VerifizierenController {
             stage.setScene(scene);
             stage.show();
         });
+        vesq.setOnFailed((t) -> vesq.getException().printStackTrace());
+        vesq.execute();
 
     }
 
@@ -129,5 +139,8 @@ public class VerifizierenController {
             stage.setScene(scene);
             stage.show();
         });
+        vesq.execute();
+
     }
+
 }

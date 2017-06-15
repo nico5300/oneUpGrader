@@ -81,7 +81,7 @@ public class AbrufenEntryController {
                 kosten = 5;
                 break;
                 default:
-                    builder.append("Woah, Technology... failed!!");    // Fehler... sollte nie passieren
+                    builder.append("Woah, Technology... failed!");    // Fehler... sollte nie passieren
                     kosten = 0;
         }
         builder.append("vom ");

@@ -5,6 +5,7 @@ import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
 import de.hlg.oneUpGrader.client.ui.view.VerifizierenView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -18,16 +19,18 @@ import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 
 /**
  * Created by Jakob/Miran on 04.05.17.
  */
-public class VerifizierenAuswahlController {
+public class VerifizierenAuswahlController implements Initializable {
 
     @Inject
     private HashMap<String, Object> injectionMap;
@@ -70,27 +73,7 @@ public class VerifizierenAuswahlController {
      */
 
     public VerifizierenAuswahlController() {
-        Prüfung p = VerifizierenPruefung;
 
-
-        Date pdatum = new Date();
-        Format formatter = new SimpleDateFormat("dd-MM-yyyy");          //umwandlung des Date Objekts in ein String
-        String datum = formatter.format(pdatum);
-
-        String art;
-        if (p.getArt()) {                                                       //"umwandlung" des Booleans art in ein String
-            art = "großer Leistungsnachweis (z.B.: Schulaufgabe, Klausur)";
-        }
-        else {
-            art = "kleiner Leistungsnachweis (z.B.: Stegreifaufgabe, Test)";
-        }
-
-
-        labelJahrgangsstufe.setText("" + p.getJahrgangsstufe());                //  "" ist notwendig damit der Übergabeparameter ein String ist
-        labelFach.setText(p.getFach());
-        labelLehrer.setText(p.getLehrer());
-        labelDatum.setText(datum);
-        labelArt.setText(art);
     }
 
 
@@ -175,5 +158,32 @@ public class VerifizierenAuswahlController {
             Alert al1 = new Alert(Alert.AlertType.ERROR, "Prüfung muss vor dem Bewerten\nheruntergeladen werden", ButtonType.OK);
             al1.show();
         }
+    }
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Prüfung p = VerifizierenPruefung; // Deswegen können wir diesen Code nicht in den Konstruktor packen
+                                          // @Inject und @FXML füllt erst nach der Abarbeitung des Konstruktors
+                                          // die Variablen
+
+        Date pdatum = new Date();
+        Format formatter = new SimpleDateFormat("dd-MM-yyyy");          //umwandlung des Date Objekts in ein String
+        String datum = formatter.format(pdatum);
+
+        String art;
+        if (p.getArt()) {                                                       //"umwandlung" des Booleans art in ein String
+            art = "großer Leistungsnachweis (z.B.: Schulaufgabe, Klausur)";
+        }
+        else {
+            art = "kleiner Leistungsnachweis (z.B.: Stegreifaufgabe, Test)";
+        }
+
+
+        labelJahrgangsstufe.setText("" + p.getJahrgangsstufe());                //  "" ist notwendig damit der Übergabeparameter ein String ist
+        labelFach.setText(p.getFach());
+        labelLehrer.setText(p.getLehrer());
+        labelDatum.setText(datum);
+        labelArt.setText(art);
     }
 }
