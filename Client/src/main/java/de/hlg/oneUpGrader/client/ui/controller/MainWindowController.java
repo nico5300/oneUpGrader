@@ -1,6 +1,9 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.dbConnection.InformationenQuery;
+import de.hlg.oneUpGrader.client.dbConnection.AbrufenAuswahlQuery;
+import de.hlg.oneUpGrader.client.dbConnection.Prüfung;
+import de.hlg.oneUpGrader.client.dbConnection.VerifizierenQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
 import de.hlg.oneUpGrader.client.ui.view.AnmeldenView;
 import de.hlg.oneUpGrader.client.ui.view.HochladenView;
@@ -10,11 +13,16 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.Optional;
 
 /**
  * Created by Miran on 08.04.17.
@@ -51,13 +59,43 @@ public class MainWindowController {
         currentStage.close();
     }
 
+    /**
+     * Diese Methode wechselt die View zur VerifizierenAuswahlView und übergibt dem VerifizierenAuswahlController gleichzeitig
+     * die nächste zu verifizierende Prüfung die von der VerifizierenQuery zurückgegeben wird.
+     *
+     * @Author Jakob
+     * @param ActionEvent e
+     */
+
+
     @FXML
     private void onVerifizierenClick(ActionEvent e) {
-        VerifizierenAuswahlView view = new VerifizierenAuswahlView();
-        Stage st = ((Stage) (btnVerifizieren.getScene().getWindow()));
-        Scene scene = new Scene(view.getView());
-        st.setScene(scene);
-        st.show();
+        VerifizierenQuery vq = new VerifizierenQuery();
+
+        vq.setOnSucceeded((event) -> {
+            Optional<Prüfung> opt = vq.getValue();
+
+            if(!opt.isPresent()) { // DEBUG-----------------------------------__!!!!!!!!!!!!!!!!!!!!11!!!elf!!!!11!!
+                Alert al = new Alert(Alert.AlertType.INFORMATION, "Es existieren zzt. keine Prüfungen," +
+                        "die noch nicht verifiziert wurden! Bitte schau später nochmal vorbei" +
+                        "oder lade selbst Prüfungen hoch, um Punkte zu bekommen!", ButtonType.OK);
+                al.getDialogPane().getChildren().stream().filter(node -> node instanceof Label).forEach(node -> ((Label)node).setMinHeight(Region.USE_PREF_SIZE));
+                al.show();
+                return;
+            }
+
+            Prüfung p = opt.get();
+
+            injectionMap.put("VerifizierenPruefung", p);
+
+            VerifizierenAuswahlView view = new VerifizierenAuswahlView();
+            Stage st = ((Stage) (btnVerifizieren.getScene().getWindow()));
+            Scene scene = new Scene(view.getView());
+            st.setScene(scene);
+            st.show();
+
+        });
+        vq.execute();
     }
 
     @FXML

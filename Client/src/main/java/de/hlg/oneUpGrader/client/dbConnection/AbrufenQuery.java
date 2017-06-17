@@ -26,24 +26,26 @@ public class AbrufenQuery extends Task<Void>{
     private String fach;
     private String currentUser;
     private int jahrgang;
-    private List<UpdateHandler<FXMLView>> observerList;
+    private List<UpdateHandler<FXMLView>> observerList; // Hier werden die angemeldeten Observer gespeichert
 
+
+    // Der SELECT Teil der Abfrage
     private String queryPart1Long = "SELECT Prüfungen.PrüfungsID, Fach.Name, Lehrer.Name, " +
                                     "Prüfungen.Jahrgangsstufe, Prüfungen.Datum, Prüfungen.Art, " +
                                     "Prüfungen.Beschreibung";  // Für Wunschkriterien...
 
     private String queryPart1Short = "SELECT Prüfungen.PrüfungsID, Prüfungen.Datum, Prüfungen.Art ";
 
+
+    // Der Inner Join
     private String queryPart2 = "FROM Prüfungen, Fach, Lehrer " +
                                 "WHERE Fach.FachID = Prüfungen.Fach && " +
-                                "Lehrer.LehrerID = Prüfungen.Lehrer "; // Inner Join...
+                                "Lehrer.LehrerID = Prüfungen.Lehrer ";
 
 
+    // Die vom Benutzer gemachten Angaben, getrennt wg. Vorarbeit für Wunschkriterium
     private String jahrgangStringQuery = "&& ? = Prüfungen.Jahrgangsstufe ";
-
-    private String lehrerStringQuery = "&& Lehrer.Name" +
-                                                    " LIKE CONCAT('%', ?, '%') ";
-
+    private String lehrerStringQuery = "&& Lehrer.Name LIKE CONCAT('%', ?, '%') ";
     private String fachStringQuery = "&& Fach.Name LIKE CONCAT('%', ?, '%') ";
 
 
@@ -52,6 +54,7 @@ public class AbrufenQuery extends Task<Void>{
     private String prüfungBereitsGekauftQuery = "SELECT PrüfungsID FROM Gekauft WHERE Email = ?;";
 
 
+    // Selbsterklärend: Angabe der für die Abfrage benötigten Informationen
     public AbrufenQuery(String lehrer, String fach, int jahrgang, String currentUser) {
         this.lehrer = lehrer;
         this.fach = fach;
@@ -60,6 +63,14 @@ public class AbrufenQuery extends Task<Void>{
         observerList = new ArrayList<>();
     }
 
+
+    /**
+     * Zuerst werden die Abfrage, welche Prüfungen der User gekauft hat, und die Abfrage nach den Prüfungen
+     * selber zusammengebaut und initialisiert, danach mit Parametern gefüllt und schließlich ausgeführt.
+     * die IDs der bereits vom User gekauften Prüfungen werden in eine Liste gespeichert und
+     *
+     * @return Nichts... Vorgabe der Parentmethode, einen Rückgabeparameter zu haben, deshalb ein geboxtes Void
+     */
     @Override
     protected Void call() {
         DbConnection conn = DbConnection.getInstance();
@@ -118,11 +129,11 @@ public class AbrufenQuery extends Task<Void>{
 
             ArrayList<Integer> bereitsGekauftePrüfungen = new ArrayList<>();
 
-            while (bereitsGekauftResult.next()) {
+            // Speichern der bereits gekauften Prüfungen in eine Liste, für einfache Wiederverwendung
+            while (bereitsGekauftResult.next())
                 bereitsGekauftePrüfungen.add(bereitsGekauftResult.getInt("PrüfungsID"));
-                System.out.println();
-            }
 
+            // Erstellen der korrespondierenden AbrufenEntryViews für jede Zeile im ResultSet
             while (result.next()) {
 
                 AbrufenEntryView view = new AbrufenEntryView();
@@ -131,22 +142,21 @@ public class AbrufenQuery extends Task<Void>{
                     final Date datumResult = result.getDate(2);
                     final int prüfungsIDResult = result.getInt(1);
 
-
-                    Platform.runLater( () -> {
-                        // Lambda-Magic, entspricht new Runnable() {...}, bloß geiler (leichter zum lesen), kein Boilerplate
-                        AbrufenEntryController controller = (AbrufenEntryController) view.getPresenter();
+                    // Referenz auf Controller holen, um diese mit Infos zu befüllen
+                    AbrufenEntryController controller = (AbrufenEntryController) view.getPresenter();
 
 
-                        controller.setPrüfungsTyp(prüfungsTypResult);
-                        controller.setDatum(datumResult);
-                        controller.setPrüfungsID(prüfungsIDResult);
-                        controller.setGekauft(bereitsGekauftePrüfungen.contains(prüfungsIDResult)); // Ist die Prüfung schon gekauft worden?
+                    controller.setPrüfungsTyp(prüfungsTypResult);
+                    controller.setDatum(datumResult);
+                    controller.setPrüfungsID(prüfungsIDResult);
+                    controller.setGekauft(bereitsGekauftePrüfungen.contains(prüfungsIDResult)); // Ist die Prüfung schon gekauft worden?
 
-                        for(UpdateHandler<FXMLView> i : observerList) {
-                            i.handle(view);
-                        }
+                    // Pretty dank isn't it?    Lambda-Magic ;P
+                    // Im Prinzip wird damit die ForEach Schleife im Eventhaindling ;) Thread ausgeführt
+                    // und in dieser Schleife für jeden angemeldeten Observer die .handle Methode aufgerunfen
+                    Platform.runLater(() -> observerList.forEach((i) -> i.handle(view)));
 
-                    });
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     System.out.println("Konnte beim Initialisieren des EntryViews die Werte nicht lesen!");

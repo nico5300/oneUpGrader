@@ -19,7 +19,7 @@ import java.util.Optional;
  Rückgabe eines Objekts vom Typ Prüfung 
  */
 
-public class VerifizierenQuery extends Task<Prüfung> {
+public class VerifizierenQuery extends Task<Optional<Prüfung>> {
 
     String query1 = "SELECT PrüfungsID FROM Verifiziert ORDER BY VerifiziertID;"; //Herausfinden der zu verifizierenden Prüfung
     String query2 = "SELECT * FROM Prüfungen WHERE PrüfungsID = ?;";
@@ -31,59 +31,81 @@ public class VerifizierenQuery extends Task<Prüfung> {
     int PrüfungsID;
 
     @Override
-    protected Prüfung call() throws SQLException, IOException {
+    protected Optional<Prüfung> call() {
         DbConnection datenbank = DbConnection.getInstance();
 
 
         //----------------------------------------------
         // Richtige Prüfung herausfinden
         Optional<PreparedStatement> opt = datenbank.getPreparedStatement(query1);
-        PreparedStatement prep1 = opt.get();
+
+        PreparedStatement prep1;
+        if (opt.isPresent()) {
+            prep1 = opt.get();
+        } else {
+            System.out.println("Konnte erstes PreparedStatement nicht erzeugen");
+            return Optional.empty();
+        }
 
         try {
             prep1.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+            return Optional.empty();
         }
 
-        ResultSet ergebnis = prep1.getResultSet();                  //Überprüfen ob bereits teilweise
-                                                                    //verifizierte Prüfung existiert
-        if(ergebnis.next()) {
-            PrüfungsID = ergebnis.getInt(0);
-        }
-        else {
-            Optional<PreparedStatement> opt5 = datenbank.getPreparedStatement(query5);
-            PreparedStatement prep5 = opt5.get();
 
-            try {
-                prep5.execute();
-            } catch (SQLException e) {
-                e.printStackTrace();
+        try {
+            ResultSet ergebnis = prep1.getResultSet();                  //Überprüfen ob bereits teilweise
+            //verifizierte Prüfung existiert
+            if(ergebnis.next()) {
+                PrüfungsID = ergebnis.getInt(0);
             }
-            ResultSet ergebnis5 = prep5.getResultSet();
-            if(ergebnis5.next()) {
-                PrüfungsID = ergebnis5.getInt("PrüfungsID");
-            }                                                       //Ansonsten überprüfen ob noch gar nicht
-                                                                    //verifizierte Prüfungen existieren
             else {
-                return null;
-            }                                                       //keine zu verifizierende Prüfung
+                Optional<PreparedStatement> opt5 = datenbank.getPreparedStatement(query5);
+                PreparedStatement prep5 = opt5.get();
 
+
+                    prep5.execute();
+
+                ResultSet ergebnis5 = prep5.getResultSet();
+                if(ergebnis5.next()) {
+                    PrüfungsID = ergebnis5.getInt("PrüfungsID");
+                }                                                       //Ansonsten überprüfen ob noch gar nicht
+                                                                        //verifizierte Prüfungen existieren
+                else {
+                    return Optional.empty();
+                }                                                       //keine zu verifizierende Prüfung
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Verarbeiten von Abfrage 1");
+            e.printStackTrace();
         }
 
         //-----------------------------------------
         // Prüfung herunterladen und abspeichern
             Optional<PreparedStatement> opt2 = datenbank.getPreparedStatement(query2);
-            PreparedStatement prep2 = opt2.get();
 
+        PreparedStatement prep2;
+        if (opt2.isPresent()) {
+            prep2 = opt2.get();
+        } else {
+            System.out.println("Konnte zweites PreparedStatement nicht erzeugen");
+            return Optional.empty();
+        }
+        try {
             prep2.setInt(1, PrüfungsID);
 
-            try {
-                prep2.execute();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
+            prep2.execute();
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Ausführen von Abfrage 2");
+            e.printStackTrace();
+        }
+
+
+        try {
             ResultSet ergebnis2 = prep2.getResultSet();                     //Prüfung herunterladen
             BufferedImage bild = null;
             if(ergebnis2.next())
@@ -93,8 +115,7 @@ public class VerifizierenQuery extends Task<Prüfung> {
                     bild = ImageIO.read(blob.getBinaryStream());
                 } catch (IOException e) {
                     e.printStackTrace();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                    return Optional.empty();
                 }
 
                 int fachID = ergebnis2.getInt(2);
@@ -110,15 +131,20 @@ public class VerifizierenQuery extends Task<Prüfung> {
                 //FachID durch Fachnamen ersetzen
 
                 Optional<PreparedStatement> opt3 = datenbank.getPreparedStatement(query3);
-                PreparedStatement prep3 = opt3.get();
+
+                PreparedStatement prep3;
+                if (opt3.isPresent()) {
+                    prep3 = opt3.get();
+                } else {
+                    System.out.println("Konnte drittes PreparedStatement nicht erzeugen");
+                    return Optional.empty();
+                }
 
                 prep3.setString(1, String.valueOf(fachID));
 
-                try {
+
                     prep3.execute();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+
 
                 ResultSet ergebnis3 = prep3.getResultSet();
 
@@ -131,9 +157,18 @@ public class VerifizierenQuery extends Task<Prüfung> {
                 //-------------------------------------------
                 // LehrerID durch Lehrernamen ersetzen
                 Optional<PreparedStatement> opt4 = datenbank.getPreparedStatement(query4);
-                PreparedStatement prep4 = opt4.get();
 
-                prep3.setString(1, String.valueOf(lehrerID));
+                PreparedStatement prep4;
+                if (opt4.isPresent()) {
+                    prep4 = opt4.get();
+                } else {
+                    System.out.println("Konnte viertes PreparedStatement nicht erzeugen");
+                    return Optional.empty();
+                }
+
+                prep4.setString(1, String.valueOf(lehrerID));
+
+                prep4.execute();
 
                 ResultSet ergebnis4 = prep4.getResultSet();
 
@@ -148,11 +183,19 @@ public class VerifizierenQuery extends Task<Prüfung> {
                 //Prüfungsobjekt erzeugen
                 test = new Prüfung(PrüfungsID, fach, lehrer, jahrgangsstufe, datum, art, beschreibung, bild);
                 //Prüfung zurückgeben
-                return test;
+                return Optional.of(test);
             }
+        } catch (SQLException e) {
+            System.out.println("Allgemeiner Fehler bei Abfragen 2 bis 4... Siehe Stacktrace und Zeilenangabe!");
+            e.printStackTrace();
+            return Optional.empty();
+        }
 
-        return null;
+        return Optional.empty();
     }
+
+
+
     public void execute() {
         Thread t = new Thread(this);
         t.setDaemon(true);

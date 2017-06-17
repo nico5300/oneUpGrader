@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 
 /**
- * Created by Jakob on 11.05.2017.
+ * Created by Miran on 11.05.2017.
  */
 public class AnmeldenController {
     @FXML
