@@ -1,6 +1,6 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
-import de.hlg.oneUpGrader.client.dbConnection.AbrufenAuswahlQuery;
+import de.hlg.oneUpGrader.client.dbConnection.InformationenQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
 import de.hlg.oneUpGrader.client.ui.view.AnmeldenView;
 import de.hlg.oneUpGrader.client.ui.view.HochladenView;
@@ -75,23 +75,23 @@ public class MainWindowController {
 
 
 
-        AbrufenAuswahlQuery aaq = new AbrufenAuswahlQuery();
+        InformationenQuery iq = new InformationenQuery();
 
-        aaq.setOnSucceeded( (WorkerStateEvent t) -> {
+        iq.setOnSucceeded( (WorkerStateEvent t) -> {
             AbrufenAuswahlController controller = (AbrufenAuswahlController) view.getPresenter();
-            controller.setCboxLehrerList(aaq.getLehrerList());
-            controller.setCboxFachList(aaq.getFachList());
-            controller.setCboxJahrgangList(aaq.getJahrgangList());
+            controller.setCboxLehrerList(iq.getLehrerList());
+            controller.setCboxFachList(iq.getFachList());
+            controller.setCboxJahrgangList(iq.getJahrgangList());
 
             injectionMap.remove("lehrerList");
             injectionMap.remove("fachList");
             injectionMap.remove("jahrgangList");
-            injectionMap.put("lehrerList", aaq.getLehrerList());
-            injectionMap.put("fachList", aaq.getFachList());
-            injectionMap.put("jahrgangList", aaq.getJahrgangList());
+            injectionMap.put("lehrerList", iq.getLehrerList());
+            injectionMap.put("fachList", iq.getFachList());
+            injectionMap.put("jahrgangList", iq.getJahrgangList());
         });
 
-        Thread t = new Thread(aaq);
+        Thread t = new Thread(iq);
         t.setDaemon(true);
         t.start();
     }
@@ -111,23 +111,23 @@ public class MainWindowController {
         stage1.setScene(scene);
         stage1.show();
 
-        AbrufenAuswahlQuery aaq = new AbrufenAuswahlQuery();
+        InformationenQuery iq = new InformationenQuery();
 
-        aaq.setOnSucceeded( (WorkerStateEvent t) -> {
+        iq.setOnSucceeded( (WorkerStateEvent t) -> {
             HochladenController controller = (HochladenController) hView.getPresenter();
-            controller.setCboxLehrerList(aaq.getLehrerList());
-            controller.setCboxFachList(aaq.getFachList());
-            controller.setCboxJahrgangList(aaq.getJahrgangList());
+            controller.setCboxLehrerList(iq.getLehrerList());
+            controller.setCboxFachList(iq.getFachList());
+            controller.setCboxJahrgangList(iq.getJahrgangList());
 
             injectionMap.remove("lehrerlist");
             injectionMap.remove("fachList");
             injectionMap.remove("jahrgangList");
-            injectionMap.put("lehrerlist", aaq.getLehrerList());
-            injectionMap.put("fachList", aaq.getFachList());
-            injectionMap.put("jahrgangList", aaq.getJahrgangList());
+            injectionMap.put("lehrerlist", iq.getLehrerList());
+            injectionMap.put("fachList", iq.getFachList());
+            injectionMap.put("jahrgangList", iq.getJahrgangList());
         });
 
-        Thread t = new Thread(aaq);
+        Thread t = new Thread(iq);
         t.setDaemon(true);
         t.start();
 

@@ -10,13 +10,13 @@ import java.util.Optional;
 /**
  * Created by Nico on 19.04.2017.
  */
-public class AbrufenAuswahlQuery extends Task<Void> {
+public class InformationenQuery extends Task<Void> {
 
-    ObservableList<String> jahrgangList;
-    ObservableList<String> fachList;
-    ObservableList<String> lehrerList;
+    private ObservableList<String> jahrgangList;
+    private ObservableList<String> fachList;
+    private ObservableList<String> lehrerList;
 
-    public AbrufenAuswahlQuery() {
+    public InformationenQuery() {
         jahrgangList = FXCollections.observableArrayList();
         fachList = FXCollections.observableArrayList();
         lehrerList = FXCollections.observableArrayList();
