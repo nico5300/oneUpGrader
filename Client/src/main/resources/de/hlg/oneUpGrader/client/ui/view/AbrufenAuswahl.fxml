@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@oneUpStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hlg.oneUpGrader.client.ui.controller.AbrufenAuswahlController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@oneUpStyle.css" xmlns="http://javafx.com/javafx/8.0.71" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hlg.oneUpGrader.client.ui.controller.AbrufenAuswahlController">
    <children>
       <GridPane gridLinesVisible="true" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="lightgreenbackground" stylesheets="@oneUpStyle.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <columnConstraints>
@@ -47,6 +47,13 @@
                         <Font size="16.0" />
                      </font></Button>
                </left>
+               <right>
+                  <Button fx:id="btnGekauftePruefungenClick" maxHeight="48.0" minHeight="48.0" mnemonicParsing="false" onAction="#onGekauftePruefungenClick" prefHeight="48.0" styleClass="rechteckbutton" stylesheets="@oneUpStyle.css" text="gekaufte Prüfungen" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </right>
             </BorderPane>
             <GridPane GridPane.rowIndex="3">
               <columnConstraints>

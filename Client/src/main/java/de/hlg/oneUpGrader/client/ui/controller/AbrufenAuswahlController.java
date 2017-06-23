@@ -27,6 +27,9 @@ import java.util.ResourceBundle;
 @SuppressWarnings("unchecked") // Das ist hier in Ordnung............
 public class AbrufenAuswahlController implements Initializable {
     @FXML
+    private Button btnGekauftePruefungen;
+
+    @FXML
     private Button btnBack;
 
     @FXML
@@ -76,6 +79,11 @@ public class AbrufenAuswahlController implements Initializable {
 
     void setCboxJahrgangList(ObservableList<String> list) {
         cboxJahrgang.setItems(list);
+    }
+
+    @FXML
+    public void onGekauftePruefungenClick() {
+        //todo Wunschkriterium onGekauftePruefungenClick
     }
 
     @FXML
