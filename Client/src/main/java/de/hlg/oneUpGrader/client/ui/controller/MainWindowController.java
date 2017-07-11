@@ -1,7 +1,6 @@
 package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.dbConnection.InformationenQuery;
-import de.hlg.oneUpGrader.client.dbConnection.AbrufenAuswahlQuery;
 import de.hlg.oneUpGrader.client.dbConnection.Prüfung;
 import de.hlg.oneUpGrader.client.dbConnection.VerifizierenQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
@@ -79,7 +78,10 @@ public class MainWindowController {
                 Alert al = new Alert(Alert.AlertType.INFORMATION, "Es existieren zzt. keine Prüfungen," +
                         "die noch nicht verifiziert wurden! Bitte schau später nochmal vorbei" +
                         "oder lade selbst Prüfungen hoch, um Punkte zu bekommen!", ButtonType.OK);
+
+                // Damit ein kleiner Grafikbug auf GTK-Systemen umgangen wird. -> Nur für Nico interessant
                 al.getDialogPane().getChildren().stream().filter(node -> node instanceof Label).forEach(node -> ((Label)node).setMinHeight(Region.USE_PREF_SIZE));
+
                 al.show();
                 return;
             }

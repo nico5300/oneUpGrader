@@ -159,6 +159,11 @@ public class HochladenController implements Initializable {
 
             BufferedImage img = null;
             try {
+                if(file.length() > 20 * 1024 * 1024) {                      // Datei pls nicht größer 20MiB
+                    Alert al = new Alert(Alert.AlertType.ERROR, "Datei zu groß!\nNur Dateien bis 20MiB erlaubt!", ButtonType.OK);
+                    al.show();
+                    return;
+                }
                 img = ImageIO.read(file);                                   //umwandlung der file Datei in eine image Datei
             } catch (IOException r) {
                 Alert al = new Alert(Alert.AlertType.ERROR, "Fehler beim Einlesen der Bilddatei!", ButtonType.OK);
@@ -182,6 +187,14 @@ public class HochladenController implements Initializable {
 
             hq.setOnSucceeded(event -> {        // Nico will ein wenig Debugmeldung haben..... Kann später weg
                 System.out.println(hq.getValue());
+            });
+
+            hq.setOnSucceeded((event) -> {
+                Stage stage1 = (Stage)(datepckDatum.getScene().getWindow());
+                MainWindowView mView = new MainWindowView();
+                Scene scene = new Scene(mView.getView());
+                stage1.setScene(scene);
+                stage1.show();
             });
 
             hq.execute();

@@ -149,6 +149,12 @@ public class AbrufenEntryController {
                                 return;
                             }
 
+                            lbInfo.setText("");
+                            btnKaufen.translateXProperty().set(-35.0);
+                            btnKaufen.setFont(new Font(17.0));
+                            btnKaufen.setText("Download");
+                            lbPreis.setText("Bereits gekauft");
+
                         });
 
                         kdq.execute();
@@ -183,7 +189,16 @@ public class AbrufenEntryController {
                                 return;
                             }
 
+                            lbInfo.setText("");
+                            btnKaufen.translateXProperty().set(-35.0);
+                            lbInfo.translateXProperty().set(-50.0);
+                            btnKaufen.setFont(new Font(17.0));
+                            btnKaufen.setText("Download");
+                            lbPreis.setText("Bereits gekauft");
+
                         });
+
+
 
                         kdq.execute();
                     }
