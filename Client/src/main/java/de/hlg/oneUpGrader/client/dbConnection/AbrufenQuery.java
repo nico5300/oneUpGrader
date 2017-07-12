@@ -32,9 +32,9 @@ public class AbrufenQuery extends Task<Void>{
     // Der SELECT Teil der Abfrage
     private String queryPart1Long = "SELECT Prüfungen.PrüfungsID, Fach.Name, Lehrer.Name, " +
                                     "Prüfungen.Jahrgangsstufe, Prüfungen.Datum, Prüfungen.Art, " +
-                                    "Prüfungen.Beschreibung";  // Für Wunschkriterien...
+                                    "Prüfungen.Beschreibung, Prüfungen.Verifiziert ";  // Für Wunschkriterien...
 
-    private String queryPart1Short = "SELECT Prüfungen.PrüfungsID, Prüfungen.Datum, Prüfungen.Art ";
+    private String queryPart1Short = "SELECT Prüfungen.PrüfungsID, Prüfungen.Datum, Prüfungen.Art, Prüfungen.Verifiziert ";
 
 
     // Der Inner Join
@@ -138,9 +138,15 @@ public class AbrufenQuery extends Task<Void>{
 
                 AbrufenEntryView view = new AbrufenEntryView();
                 try{
+
+                    if(!result.getBoolean("Verifiziert")) {
+                        continue;
+                    }
+
                     final int prüfungsTypResult = result.getInt(3);
                     final Date datumResult = result.getDate(2);
                     final int prüfungsIDResult = result.getInt(1);
+
 
                     // Referenz auf Controller holen, um diese mit Infos zu befüllen
                     AbrufenEntryController controller = (AbrufenEntryController) view.getPresenter();

@@ -67,11 +67,11 @@ public class AbrufenController implements Initializable, UpdateHandler<FXMLView>
 
     //wird von fx automatisch aufgerufen und holt aus der injectionmap die daten für die labels
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(!fachString.isEmpty())
+        if(fachString != null && !fachString.isEmpty())
             lbFach.setText(fachString);
         else
             lbFach.setText("<beliebig>");
-        if(!lehrerString.isEmpty())
+        if(fachString != null && !lehrerString.isEmpty())
             lbLehrer.setText(lehrerString);
         else
             lbLehrer.setText("<beliebig>");

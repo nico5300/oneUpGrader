@@ -2,6 +2,7 @@ package de.hlg.oneUpGrader.client.ui.controller;
 
 import de.hlg.oneUpGrader.client.dbConnection.InformationenQuery;
 import de.hlg.oneUpGrader.client.dbConnection.Prüfung;
+import de.hlg.oneUpGrader.client.dbConnection.PunkteAbrufenQuery;
 import de.hlg.oneUpGrader.client.dbConnection.VerifizierenQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenAuswahlView;
 import de.hlg.oneUpGrader.client.ui.view.AnmeldenView;
@@ -11,25 +12,35 @@ import javafx.collections.FXCollections;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 /**
  * Created by Miran on 08.04.17.
  */
-public class MainWindowController {
+public class MainWindowController implements Initializable{
 
     @Inject
     private HashMap<String, Object> injectionMap;
+
+    @Inject
+    private String currentUser;
+
+     @FXML
+     private Text lbPunkte;
 
     @FXML
     private Button btnAbmelden;
@@ -171,5 +182,15 @@ public class MainWindowController {
         t.setDaemon(true);
         t.start();
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        PunkteAbrufenQuery pkq = new PunkteAbrufenQuery(currentUser);
+        System.out.println("User: " + currentUser);
+        pkq.setOnSucceeded((e) -> {
+            lbPunkte.setText("Punktestand: " + pkq.getValue());
+        });
+        pkq.execute();
     }
 }

@@ -3,6 +3,7 @@ package de.hlg.oneUpGrader.client.ui.controller;
 import com.airhacks.afterburner.views.FXMLView;
 import de.hlg.oneUpGrader.client.UpdateHandler;
 import de.hlg.oneUpGrader.client.dbConnection.AbrufenQuery;
+import de.hlg.oneUpGrader.client.dbConnection.BereitsGekauftAbrufenQuery;
 import de.hlg.oneUpGrader.client.ui.view.AbrufenView;
 import de.hlg.oneUpGrader.client.ui.view.MainWindowView;
 import javafx.collections.ObservableList;
@@ -83,7 +84,24 @@ public class AbrufenAuswahlController implements Initializable {
 
     @FXML
     public void onGekauftePruefungenClick() {
-        //todo Wunschkriterium onGekauftePruefungenClick
+
+        injectionMap.put("lehrerString", lehrerString);
+        injectionMap.put("fachString", fachString);
+        injectionMap.put("jahrgangInt", jahrgangInt);
+
+        BereitsGekauftAbrufenQuery query = new BereitsGekauftAbrufenQuery(currentUser);
+
+        AbrufenView view = new AbrufenView();
+
+        //meldet diesen controller bei der query an die dann so bericht erstatten kann wenn ein ergebnis fertig ist um in die view eingefügt zu werden
+        query.addObserver( (UpdateHandler<FXMLView>) view.getPresenter());
+        //.........weil hier oben nur AbrufenController rauskommen, die UpdateHandler implementieren!
+        query.execute();
+
+        Stage st = (Stage) cboxFach.getScene().getWindow();
+        Scene scene  = new Scene(view.getView());
+        st.setScene(scene);
+        st.show();
     }
 
     @FXML
