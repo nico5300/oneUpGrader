@@ -21,7 +21,7 @@ import java.util.Optional;
 
 public class VerifizierenQuery extends Task<Optional<Prüfung>> {
 
-    String query1 = "SELECT PrüfungsID FROM Verifiziert ORDER BY VerifiziertID WHERE NOT Email = ?;"; //Herausfinden der zu verifizierenden Prüfung
+    String query1 = "SELECT PrüfungsID FROM Verifiziert ORDER BY VerifiziertID;"; //Herausfinden der zu verifizierenden Prüfung
     String query2 = "SELECT * FROM Prüfungen WHERE PrüfungsID = ?;";
     String query3 = "SELECT Name FROM Fach WHERE FachID = ?";
     String query4 = "SELECT * FROM Lehrer WHERE LehrerID = ?";
@@ -52,8 +52,6 @@ public class VerifizierenQuery extends Task<Optional<Prüfung>> {
             System.out.println("Konnte erstes PreparedStatement nicht erzeugen");
             return Optional.empty();
         }
-     
-        prep1.setString(email);
 
         try {
             prep1.execute();
