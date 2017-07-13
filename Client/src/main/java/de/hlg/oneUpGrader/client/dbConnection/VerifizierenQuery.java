@@ -21,15 +21,21 @@ import java.util.Optional;
 
 public class VerifizierenQuery extends Task<Optional<Prüfung>> {
 
-    String query1 = "SELECT PrüfungsID FROM Verifiziert ORDER BY VerifiziertID;"; //Herausfinden der zu verifizierenden Prüfung
+    String query1 = "SELECT PrüfungsID FROM Verifiziert ORDER BY VerifiziertID WHERE NOT Email = ?;"; //Herausfinden der zu verifizierenden Prüfung
     String query2 = "SELECT * FROM Prüfungen WHERE PrüfungsID = ?;";
     String query3 = "SELECT Name FROM Fach WHERE FachID = ?";
     String query4 = "SELECT * FROM Lehrer WHERE LehrerID = ?";
-    String query5 = "SELECT * FROM Prüfungen WHERE Verifiziert = false ORDER BY PrüfungsID";
+    String query5 = "SELECT * FROM Prüfungen WHERE Verifiziert = false AND NOT AutorID = ? ORDER BY PrüfungsID";
 
     Prüfung test;
     int PrüfungsID;
-
+    String email;
+ 
+    public void VerifizierenQuery(String e)
+    {
+     email = e;
+    }
+     
     @Override
     protected Optional<Prüfung> call() {
         DbConnection datenbank = DbConnection.getInstance();
@@ -46,6 +52,8 @@ public class VerifizierenQuery extends Task<Optional<Prüfung>> {
             System.out.println("Konnte erstes PreparedStatement nicht erzeugen");
             return Optional.empty();
         }
+     
+        prep1.setString(email);
 
         try {
             prep1.execute();
@@ -59,15 +67,19 @@ public class VerifizierenQuery extends Task<Optional<Prüfung>> {
             ResultSet ergebnis = prep1.getResultSet();                  //Überprüfen ob bereits teilweise
             //verifizierte Prüfung existiert
             if(ergebnis.next()) {
-                PrüfungsID = ergebnis.getInt(0);
+                PrüfungsID = ergebnis.getInt("PrüfungsID");
             }
             else {
                 Optional<PreparedStatement> opt5 = datenbank.getPreparedStatement(query5);
                 PreparedStatement prep5 = opt5.get();
-
-
+                
+                prep5.setString(email);
+                try {
                     prep5.execute();
-
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+             
                 ResultSet ergebnis5 = prep5.getResultSet();
                 if(ergebnis5.next()) {
                     PrüfungsID = ergebnis5.getInt("PrüfungsID");
